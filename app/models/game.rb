@@ -9,4 +9,18 @@
 
 class Game < ApplicationRecord
   has_many :players
+
+  aasm column: :state do
+    state :created, initial: true
+    state :started
+    state :finished
+
+    event :start do
+      transitions from: :requested, to: :started
+    end
+
+    event :finish do
+      transitions from: :started, to: :finished
+    end
+  end
 end
