@@ -8,6 +8,8 @@
 #
 
 class Game < ApplicationRecord
+  include AASM
+
   has_many :players
 
   aasm column: :state do
