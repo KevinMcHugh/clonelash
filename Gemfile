@@ -37,6 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'aasm'
+gem 'annotate'
 
 group :development, :test do
   # pry as console/debugger
