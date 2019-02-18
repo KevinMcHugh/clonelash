@@ -38,6 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'aasm'
 gem 'annotate'
+gem 'rack-cors'
 
 group :development, :test do
   # pry as console/debugger
