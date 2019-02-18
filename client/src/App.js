@@ -28,7 +28,9 @@ class App extends Component {
         <header className="App-header">
           Stink Buttsmell
 
-          {this.state.games}
+          {this.state.games.map (game => {
+            return (<div key={game.id}>{game.id}</div>)
+          })}
 
         </header>
       </div>
