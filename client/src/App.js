@@ -22,6 +22,10 @@ class App extends Component {
     }).catch(error => console.log(error))
   }
 
+  _onClick(gameId) {
+    console.log(gameId)
+  }
+
   render() {
     return (
       <div className="App">
@@ -29,7 +33,7 @@ class App extends Component {
           Stink Buttsmell
 
           {this.state.games.map (game => {
-            return (<div key={game.id}>{game.id}</div>)
+            return (<button key={game.id} onClick={(e) => this._onClick(game.id, e)}>{game.id}</button>)
           })}
 
         </header>
