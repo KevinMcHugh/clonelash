@@ -1,38 +1,47 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import axios from 'axios';
+import './App.css';
 
 class Game extends Component {
 
   constructor(props){
     super(props)
     this.state = {
-      games: []
+      game: null
     }
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/games.json')
+    axios.get('http://localhost:3001' + window.location.pathname)
       .then(response => {
-        console.log(response)
         this.setState({
-          games: response.data
+          game: response.data
         })
     }).catch(error => console.log(error))
   }
 
-  _onClick(gameId) {
-    console.log(gameId)
-  }
-
   render() {
+    if (this.state.game) {
+      return (
+        <div className="App">
+          <header className="App-header">
+            {this.state.game.state}
+            {(this.state.game.messages || []).map (message => {
+              return (<div>{message}</div>)
+            })}
+          </header>
+        </div>
+      )
+    }
+
     return (
-      <div className="Game">
-        <header className="Game-header">
-          game
+      <div className="App">
+        <header className="App-header">
+          hang on...
         </header>
       </div>
-    );
+    )
   }
 }
 

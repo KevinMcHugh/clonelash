@@ -15,7 +15,6 @@ class Home extends Component {
   componentWillMount() {
     axios.get('http://localhost:3001/games.json')
       .then(response => {
-        console.log(response)
         this.setState({
           games: response.data
         })
@@ -23,7 +22,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log()
     return (
       <div className="App">
         <header className="App-header">
