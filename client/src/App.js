@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import Home from './Home';
+import Game from './Game';
+import FourOhFour from './FourOhFour';
+
+const PAGES = {
+  undefined: Home,
+  '/': Home,
+  '/games': Game,
+};
 
 class App extends Component {
 
@@ -11,34 +20,11 @@ class App extends Component {
       games: []
     }
   }
-
-  componentDidMount() {
-    axios.get('http://localhost:3001/games.json')
-      .then(response => {
-        console.log(response)
-        this.setState({
-          games: response.data
-        })
-    }).catch(error => console.log(error))
-  }
-
-  _onClick(gameId) {
-    console.log(gameId)
-  }
-
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          Stink Buttsmell
 
-          {this.state.games.map (game => {
-            return (<button key={game.id} onClick={(e) => this._onClick(game.id, e)}>{game.id}</button>)
-          })}
-
-        </header>
-      </div>
-    );
+    const Handler = PAGES[this.props.pathname] || FourOhFour;
+    console.log(this.props.pathname)
+    return <Handler />;
   }
 }
 
