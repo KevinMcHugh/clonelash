@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import history from './utils/history';
+import router from './utils/router';
+import routes from './utils/routes';
+const container = document.getElementById('root');
+function renderComponent(component) {
+  ReactDOM.render(component, container);
+}
+function render(location) {
+  router.resolve(routes, location)
+    .then(renderComponent)
+    .catch(error => router.resolve(routes, { ...location, error })
+    .then(renderComponent));
+}
+render(history.getCurrentLocation()); // render the current URL
+history.listen(render);               // render subsequent URLs
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
