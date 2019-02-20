@@ -13,7 +13,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001' + window.location.pathname)
+    axios.get('http://localhost:3001/games/' + this.props.params.id)
       .then(response => {
         this.setState({
           game: response.data

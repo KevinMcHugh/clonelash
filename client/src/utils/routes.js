@@ -5,7 +5,7 @@ import FourOhFour from '../FourOhFour';
 
 const routes = [
   { path: '/', action: () => <Home /> },
-  { path: '/games/:id', action: () => <Game /> }
+  { path: '/games/:id', id: 'foo', action: (params) => <Game {...params}/> }
 ];
 
 export default routes
