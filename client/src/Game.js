@@ -8,7 +8,9 @@ class Game extends Component {
   constructor(props){
     super(props)
     this.state = {
-      game: null
+      game: null,
+      player: null,
+      players: []
     }
   }
 
@@ -17,6 +19,16 @@ class Game extends Component {
       .then(response => {
         this.setState({
           game: response.data
+        })
+        this._getPlayers()
+    }).catch(error => console.log(error))
+  }
+
+  _getPlayers() {
+    axios.get('http://localhost:3001/games/' + this.props.params.id + '/players')
+      .then(response => {
+        this.setState({
+          players: response.data
         })
     }).catch(error => console.log(error))
   }
@@ -28,8 +40,11 @@ class Game extends Component {
     axios.post('http://localhost:3001/players',
       {game_id: this.props.params.id, name: name})
       .then(response => {
+        const players = this.state.players
+        players.push(response.data)
         this.setState({
-          player: response.data
+          player: response.data,
+          players
         })
     }).catch(error => console.log(error))
   }
@@ -40,8 +55,8 @@ class Game extends Component {
         <div className="App">
           <header className="App-header">
             {this.state.game.state}
-            {(this.state.game.messages || []).map (message => {
-              return (<div>{message}</div>)
+            {(this.state.players || []).map (player => {
+              return (<div>{player.name} {player.id == (this.state.player || {}).id ? "*" : "" }</div>)
             })}
             {this._renderPlayer()}
           </header>
@@ -59,15 +74,8 @@ class Game extends Component {
   }
 
   _renderPlayer() {
-    // can't just store this on the player if the player accidentally navigates away
-    if (this.state.player) {
-      return (
-        <div>
-          <label>Current Player:</label>
-          {this.state.player.name}
-        </div>
-      )
-    } else {
+    // can't just store this on the state if the player accidentally navigates away
+    if (!this.state.player) {
       return (
         <form onSubmit={this._onSubmit}>
           <input name="name" placeholder="player name"/>
