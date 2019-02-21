@@ -5,8 +5,10 @@
   "dependencies": {
     "history": "^3.3.0",
     "react": "^16.8.2",
+    "react-actioncable-provider": "^2.0.0",
     "react-dom": "^16.8.2",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "universal-cookie": "^3.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

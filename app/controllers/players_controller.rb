@@ -3,6 +3,9 @@ class PlayersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    render json: Player.create(game_id: params[:game_id], name: params[:name])
+    player = Player.create(game_id: params[:game_id], name: params[:name])
+    cookies.permanent[:player_id] = player.id
+    PlayerChannel.broadcast_to(player.game, player.as_json)
+    render json: player
   end
 end

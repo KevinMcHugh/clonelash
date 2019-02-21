@@ -7,6 +7,7 @@ import history from './utils/history';
 import router from './utils/router';
 import routes from './utils/routes';
 const container = document.getElementById('root');
+
 function renderComponent(component) {
   ReactDOM.render(component, container);
 }

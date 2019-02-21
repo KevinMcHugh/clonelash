@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import axios from 'axios';
 import './App.css';
 import Players from './Players';
+import Cookies from 'universal-cookie';
 
 class Game extends Component {
 
@@ -11,7 +12,6 @@ class Game extends Component {
     this.state = {
       game: null,
       player: null,
-      players: [],
     }
   }
 
@@ -21,19 +21,8 @@ class Game extends Component {
         this.setState({
           game: response.data
         })
-        this._getPlayers()
     }).catch(error => console.log(error))
   }
-
-  _getPlayers() {
-    axios.get('http://localhost:3001/games/' + this.props.params.id + '/players')
-      .then(response => {
-        this.setState({
-          players: response.data
-        })
-    }).catch(error => console.log(error))
-  }
-
 
   _onSubmit = (e) => {
     e.preventDefault()
@@ -41,12 +30,11 @@ class Game extends Component {
     axios.post('http://localhost:3001/players',
       {game_id: this.props.params.id, name: name})
       .then(response => {
-        const players = this.state.players
-        players.push(response.data)
+        const cookies = new Cookies();
+        cookies.set('player_id', response.data.id, { path: '/' });
 
         this.setState({
           player: response.data,
-          players
         })
     }).catch(error => console.log(error))
   }
