@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import axios from 'axios';
 import './App.css';
+import Players from './Players';
 
 class Game extends Component {
 
@@ -10,7 +11,7 @@ class Game extends Component {
     this.state = {
       game: null,
       player: null,
-      players: []
+      players: [],
     }
   }
 
@@ -42,6 +43,7 @@ class Game extends Component {
       .then(response => {
         const players = this.state.players
         players.push(response.data)
+
         this.setState({
           player: response.data,
           players
@@ -55,9 +57,7 @@ class Game extends Component {
         <div className="App">
           <header className="App-header">
             {this.state.game.state}
-            {(this.state.players || []).map (player => {
-              return (<div>{player.name} {player.id == (this.state.player || {}).id ? "*" : "" }</div>)
-            })}
+            <Players game_id={this.props.params.id} player={this.state.player} />
             {this._renderPlayer()}
           </header>
         </div>
