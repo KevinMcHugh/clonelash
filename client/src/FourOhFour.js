@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import axios from 'axios';
 
 class Home extends Component {
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import axios from 'axios';
 import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
 import { API_WS_ROOT } from './constants';
@@ -42,7 +41,7 @@ class Players extends Component {
               channel={channel}
               onReceived={this.handleReceivedPlayer} />
             {this.state.players.map (player => {
-              return (<div key={player.id}>{player.name} {player.id == playerId ? "*" : "" }</div>)
+              return (<div key={player.id}>{player.name} {player.id === playerId ? "*" : "" }</div>)
             })}
             {this._renderCurrentPlayer()}
           </div>
