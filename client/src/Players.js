@@ -23,7 +23,9 @@ class Players extends Component {
 
   handleReceivedPlayer = (response) => {
     let players = this.state.players;
-    players.push(response)
+    if (!players.some(p => p.id === response.id)) {
+      players.push(response)
+    }
     console.log(response)
     this.setState({
       players
@@ -31,20 +33,19 @@ class Players extends Component {
   };
 
   render() {
+    // TODO: FF seems to have issues getting it's own messages or something...
     const channel = { channel: 'PlayerChannel', id: this.props.game_id }
     const playerId = (this.props.player || {}).id
     if (this.state.players) {
       return (
-        <ActionCableProvider url={API_WS_ROOT}>
-          <div>
-            <ActionCableConsumer
-              channel={channel}
-              onReceived={this.handleReceivedPlayer} />
-            {this.state.players.map (player => {
-              return (<div key={player.id}>{player.name} {player.id === playerId ? "*" : "" }</div>)
-            })}
-          </div>
-        </ActionCableProvider>
+        <div>
+          <ActionCableConsumer
+            channel={channel}
+            onReceived={this.handleReceivedPlayer} />
+          {this.state.players.map (player => {
+            return (<div key={player.id}>{player.name} {player.id === playerId ? "*" : "" }</div>)
+          })}
+        </div>
       )
     }
 

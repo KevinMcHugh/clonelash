@@ -25,4 +25,18 @@ class Game < ApplicationRecord
       transitions from: :started, to: :finished
     end
   end
+
+  def as_json(options={})
+    {
+      id: id,
+      state: state,
+      created_at: created_at,
+      updated_at: updated_at,
+      startable: startable?
+    }
+  end
+
+  def startable?
+    state == :created && players.count > 3
+  end
 end

@@ -3,6 +3,8 @@ import axios from 'axios';
 import './App.css';
 import Players from './Players';
 import Cookies from 'universal-cookie';
+import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
+import { API_WS_ROOT } from './constants';
 
 class Game extends Component {
 
@@ -23,6 +25,12 @@ class Game extends Component {
     }).catch(error => console.log(error))
   }
 
+  handleReceivedGame = (response) => {
+    this.setState({
+      game: response
+    });
+  }
+
   _onSubmit = (e) => {
     e.preventDefault()
     const name = e.target.elements[0].value
@@ -39,15 +47,22 @@ class Game extends Component {
   }
 
   render() {
+    const channel = { channel: 'GameChannel', id: this.props.id }
+
     if (this.state.game) {
       return (
-        <div className="App">
-          <header className="App-header">
-            {this.state.game.state}
-            <Players game_id={this.props.params.id} player={this.state.player} />
-            {this._renderPlayer()}
-          </header>
-        </div>
+        <ActionCableProvider url={API_WS_ROOT}>
+          <div className="App">
+            <ActionCableConsumer channel={channel}
+                                 onReceived={this.handleReceivedGame} />
+            <header className="App-header">
+              {this._renderPlayer()}
+              {this.state.game.state}
+              {this._renderStartOrWait()}
+              <Players game_id={this.props.params.id} player={this.state.player} />
+            </header>
+          </div>
+        </ActionCableProvider>
       )
     }
 
@@ -60,9 +75,32 @@ class Game extends Component {
     )
   }
 
+  _renderStartOrWait() {
+    if (this.state.game.state == "created") {
+      if (this.state.game.startable) {
+        return (<button onClick={this._startGame}>Start the game now!</button>)
+      } else {
+        return (<div> Waiting for more players! </div>)
+      }
+    }
+  }
+
+  _startGame = (e) => {
+    e.preventDefault()
+    axios.put('http://localhost:3001/games/' + this.props.params.id,
+      {game: { state: 'started'}})
+      .then(response => {
+        this.setState({
+          game: response.data,
+        })
+    }).catch(error => console.log(error))
+  }
+
   _renderPlayer() {
-    // can't just store this on the state if the player accidentally navigates away
-    if (!this.state.player) {
+    if (this.state.game.state != 'created') {
+      return <div> Sorry, you are too late to join the game, but have fun voting!</div>
+    }
+    else if (!this.state.player) {
       return (
         <form onSubmit={this._onSubmit}>
           <input name="name" placeholder="player name"/>
