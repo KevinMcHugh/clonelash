@@ -43,7 +43,6 @@ class Players extends Component {
             {this.state.players.map (player => {
               return (<div key={player.id}>{player.name} {player.id === playerId ? "*" : "" }</div>)
             })}
-            {this._renderCurrentPlayer()}
           </div>
         </ActionCableProvider>
       )
@@ -54,12 +53,6 @@ class Players extends Component {
         hang on...
       </div>
     )
-  }
-
-  _renderCurrentPlayer() {
-    if (this.props.player) {
-      return (<div key={this.props.player.id}>{this.props.player.name}"*"</div>)
-    }
   }
 }
 
