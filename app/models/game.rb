@@ -37,6 +37,6 @@ class Game < ApplicationRecord
   end
 
   def startable?
-    state == :created && players.count > 3
+    created? && players.count > 3
   end
 end

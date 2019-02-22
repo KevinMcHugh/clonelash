@@ -14,7 +14,10 @@ class GamesController < ApplicationController
   end
 
   def update
-    render json: Game.find(params[:id]).update_attributes(update_params).as_json
+    game = Game.find(params[:id])
+    game.update_attributes(update_params)
+    GameChannel.broadcast_to(game, game.as_json)
+    render json: game.as_json
   end
 
   private

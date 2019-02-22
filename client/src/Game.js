@@ -97,16 +97,17 @@ class Game extends Component {
   }
 
   _renderPlayer() {
-    if (this.state.game.state != 'created') {
-      return <div> Sorry, you are too late to join the game, but have fun voting!</div>
-    }
-    else if (!this.state.player) {
-      return (
-        <form onSubmit={this._onSubmit}>
-          <input name="name" placeholder="player name"/>
-          <button>OK</button>
-        </form>
-      )
+    if (!this.state.player) {
+      if (this.state.game.state != 'created') {
+        return <div> Sorry, you are too late to join the game, but have fun voting!</div>
+      } else {
+        return (
+          <form onSubmit={this._onSubmit}>
+            <input name="name" placeholder="player name"/>
+            <button>OK</button>
+          </form>
+        )
+      }
     }
   }
 }
