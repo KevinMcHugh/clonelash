@@ -40,11 +40,16 @@ gem 'aasm'
 gem 'annotate'
 gem 'rack-cors'
 
+gem 'interactor'
+gem 'rspec'
+
 group :development, :test do
   # pry as console/debugger
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.8'
+
 end
 
 group :development do
