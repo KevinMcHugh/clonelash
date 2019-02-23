@@ -23,6 +23,15 @@ class Game extends Component {
           game: response.data
         })
     }).catch(error => console.log(error))
+    const cookies = new Cookies();
+    if (cookies.get('player_id')) {
+      axios.get('http://localhost:3001/players/' + cookies.get('player_id'))
+        .then(response => {
+          this.setState({
+            player: response.data
+          })
+      }).catch(error => console.log(error))
+    }
   }
 
   handleReceivedGame = (response) => {
