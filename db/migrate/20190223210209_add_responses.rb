@@ -1,4 +1,4 @@
-class AddRespondents < ActiveRecord::Migration[5.2]
+class AddResponses < ActiveRecord::Migration[5.2]
   def change
     create_table :responses, id: :uuid  do |t|
       t.string :text

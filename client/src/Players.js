@@ -22,19 +22,21 @@ class Players extends Component {
   }
 
   handleReceivedPlayer = (response) => {
-    let players = this.state.players;
-    if (!players.some(p => p.id === response.id)) {
-      players.push(response)
+    if (response.message_type == 'Player') {
+      let players = this.state.players;
+      if (!players.some(p => p.id === response.id)) {
+        players.push(response)
+      }
+      console.log(response)
+      this.setState({
+        players
+      });
     }
-    console.log(response)
-    this.setState({
-      players
-    });
   };
 
   render() {
     // TODO: FF seems to have issues getting it's own messages or something...
-    const channel = { channel: 'PlayerChannel', id: this.props.game_id }
+    const channel = { channel: 'GameChannel', id: this.props.game_id }
     const playerId = (this.props.player || {}).id
     if (this.state.players) {
       return (

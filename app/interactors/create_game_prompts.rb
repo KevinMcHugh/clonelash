@@ -20,7 +20,9 @@ class CreateGamePrompts
     pairs.each_with_index do |permutation, index|
       game_prompt = GamePrompt.create(prompt: prompts[index], game: game)
       permutation.each do |player|
-        Response.create(player: player, game_prompt: game_prompt)
+        response = Response.create(player: player, game_prompt: game_prompt)
+        # wait actually this is gonna kind suck it's very slow.
+        PlayerChannel.broadcast_to(player, response.to_socket_json)
       end
     end
   end

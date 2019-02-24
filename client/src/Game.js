@@ -13,6 +13,7 @@ class Game extends Component {
     this.state = {
       game: null,
       player: null,
+      messages: []
     }
   }
 
@@ -35,9 +36,11 @@ class Game extends Component {
   }
 
   handleReceivedGame = (response) => {
-    this.setState({
-      game: response
-    });
+    if (response.message_type == 'Game') {
+      this.setState({
+        game: response
+      })
+    }
   }
 
   _onSubmit = (e) => {
@@ -56,13 +59,13 @@ class Game extends Component {
   }
 
   render() {
-    const channel = { channel: 'GameChannel', id: this.props.id }
+    const gameChannel = { channel: 'GameChannel', id: this.props.params.id }
 
     if (this.state.game) {
       return (
         <ActionCableProvider url={API_WS_ROOT}>
           <div className="App">
-            <ActionCableConsumer channel={channel}
+            <ActionCableConsumer channel={gameChannel}
                                  onReceived={this.handleReceivedGame} />
             <header className="App-header">
               {this._renderPlayer()}
@@ -105,6 +108,16 @@ class Game extends Component {
     }).catch(error => console.log(error))
   }
 
+  handleReceivedPlayerMessage = (response) => {
+    let messages = this.state.messages;
+    if (!messages.some(p => p.id === response.id)) {
+      messages.push(response)
+    }
+    this.setState({
+      messages
+    });
+  }
+
   _renderPlayer() {
     if (!this.state.player) {
       if (this.state.game.state != 'created') {
@@ -117,6 +130,16 @@ class Game extends Component {
           </form>
         )
       }
+    } else {
+      const playerChannel = { channel: 'PlayerChannel', id: this.state.player.id }
+      const lastMessage = this.state.messages[this.state.messages.count -1]
+      return (
+        <div>
+          <ActionCableConsumer channel={playerChannel}
+                               onReceived={this.handleReceivedPlayerMessage} />
+          { lastMessage }
+        </div>
+      )
     }
   }
 }

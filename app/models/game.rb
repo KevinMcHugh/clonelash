@@ -10,7 +10,7 @@
 
 class Game < ApplicationRecord
   include AASM
-
+  include SocketSendable
   has_many :players
 
   aasm column: :state do

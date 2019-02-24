@@ -11,6 +11,8 @@
 #
 
 class Response < ApplicationRecord
+  include SocketSendable
+
   belongs_to :game_prompt
   belongs_to :player
 end

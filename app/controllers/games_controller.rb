@@ -16,12 +16,19 @@ class GamesController < ApplicationController
   def update
     game = Game.find(params[:id])
     game.update_attributes(update_params)
-    GameChannel.broadcast_to(game, game.as_json)
+    if params[:state] == "started"
+      create_prompts(game)
+    end
+    GameChannel.broadcast_to(game, game.to_socket_json)
     render json: game.as_json
   end
 
   private
   def update_params
     params.require(:game).permit(:state)
+  end
+
+  def create_prompts(game)
+    CreateGamePrompts.call(game: game)
   end
 end

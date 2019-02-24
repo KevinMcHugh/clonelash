@@ -10,5 +10,6 @@
 #
 
 class Player < ApplicationRecord
+  include SocketSendable
   belongs_to :game
 end
