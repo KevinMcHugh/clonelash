@@ -35,7 +35,6 @@ class Players extends Component {
   };
 
   render() {
-    // TODO: FF seems to have issues getting it's own messages or something...
     const channel = { channel: 'GameChannel', id: this.props.game_id }
     const playerId = (this.props.player || {}).id
     if (this.state.players) {

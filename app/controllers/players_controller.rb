@@ -15,4 +15,10 @@ class PlayersController < ApplicationController
 
     render json: player
   end
+
+  def prompts
+    player = Player.find(params[:player_id])
+
+    render json: player.responses.where(text: nil)
+  end
 end

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import Players from './Players';
+import PlayerMessages from './PlayerMessages';
 import Cookies from 'universal-cookie';
 import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
 import { API_WS_ROOT } from './constants';
@@ -108,16 +109,6 @@ class Game extends Component {
     }).catch(error => console.log(error))
   }
 
-  handleReceivedPlayerMessage = (response) => {
-    let messages = this.state.messages;
-    if (!messages.some(p => p.id === response.id)) {
-      messages.push(response)
-    }
-    this.setState({
-      messages
-    });
-  }
-
   _renderPlayer() {
     if (!this.state.player) {
       if (this.state.game.state != 'created') {
@@ -131,15 +122,7 @@ class Game extends Component {
         )
       }
     } else {
-      const playerChannel = { channel: 'PlayerChannel', id: this.state.player.id }
-      const lastMessage = this.state.messages[this.state.messages.count -1]
-      return (
-        <div>
-          <ActionCableConsumer channel={playerChannel}
-                               onReceived={this.handleReceivedPlayerMessage} />
-          { lastMessage }
-        </div>
-      )
+      return (<PlayerMessages playerId={this.state.player.id} />)
     }
   }
 }

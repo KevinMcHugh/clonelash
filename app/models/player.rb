@@ -12,4 +12,5 @@
 class Player < ApplicationRecord
   include SocketSendable
   belongs_to :game
+  has_many :responses
 end

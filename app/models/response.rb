@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: respondents
+# Table name: responses
 #
 #  id             :uuid             not null, primary key
-#  response       :string
+#  text           :string
 #  game_prompt_id :uuid             not null
 #  player_id      :uuid             not null
 #  created_at     :datetime         not null
@@ -15,4 +15,17 @@ class Response < ApplicationRecord
 
   belongs_to :game_prompt
   belongs_to :player
+
+  def as_json(options={})
+    {
+      text: text,
+      game_prompt: {
+        text: game_prompt.prompt.text
+      },
+      player: {
+        id: player.id,
+        name: player.name
+      }
+    }
+  end
 end
