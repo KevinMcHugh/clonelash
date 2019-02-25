@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
-import { API_WS_ROOT } from './constants';
+import { ActionCableConsumer } from 'react-actioncable-provider';
 import _ from 'lodash';
 
 class PlayerMessages extends Component {
@@ -23,7 +22,7 @@ class PlayerMessages extends Component {
   }
 
   handleReceivedPlayerMessage = (response) => {
-    if (response.message_type == 'Response') {
+    if (response.message_type === 'Response') {
       let prompts = this.state.prompts;
       if (!prompts.some(p => p.id === response.id)) {
         prompts.push(response)
@@ -55,14 +54,16 @@ class PlayerMessages extends Component {
     )
   }
 
-  _onSubmit = (e) => {
+  _onSubmit = (e,messageId) => {
     e.preventDefault()
     const text = e.target.elements[0].value
-    axios.put('http://localhost:3001/responses',
-      {game_id: this.props.params.id, name: name})
+    axios.put('http://localhost:3001/responses/' + messageId,
+      {text: text})
       .then(response => {
+        let prompts = this.state.prompts
+        _.remove(prompts, {id: response.data.id})
         this.setState({
-          player: response.data,
+          prompts
         })
     }).catch(error => console.log(error))
   }
@@ -73,8 +74,8 @@ class PlayerMessages extends Component {
       return (
         <div>
           Answer this question: {message.game_prompt.text}
-          <form onSubmit={this._onSubmit}>
-            <input name="name" />
+          <form onSubmit={(e) => this._onSubmit(e,message.id)}>
+            <input name="text" />
             <button>OK</button>
           </form>
         </div>

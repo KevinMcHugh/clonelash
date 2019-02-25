@@ -18,6 +18,7 @@ class Response < ApplicationRecord
 
   def as_json(options={})
     {
+      id: id,
       text: text,
       game_prompt: {
         text: game_prompt.prompt.text
