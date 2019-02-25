@@ -13,6 +13,8 @@
 class Prompt < ApplicationRecord
   enum format: {
     misc: 0,
-    new_name: 1
+    new_name: 1,
+    fill_in_the_blank: 2,
+    quote: 3,
   }
 end
