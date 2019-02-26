@@ -12,6 +12,8 @@ class Game < ApplicationRecord
   include AASM
   include SocketSendable
   has_many :players
+  has_many :game_prompts
+  has_many :responses, through: :game_prompts, source: :game_prompt
 
   aasm column: :state do
     state :created, initial: true
@@ -39,5 +41,9 @@ class Game < ApplicationRecord
 
   def startable?
     created? && players.count > 3
+  end
+
+  def all_responses_received?
+    game_prompts.any? && game_prompts.flat_map(&:responses).all? { |r| r.text.present? }
   end
 end
