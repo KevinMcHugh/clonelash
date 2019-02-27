@@ -12,10 +12,9 @@ class AdminController < ApplicationController
   def answer_questions
     game = Game.find(params[:game_id])
     game.responses.where(text: nil).find_each do |response|
-      response.update_attributes(text: Faker::FunnyName.two_word_name)
+      UpdateResponse.call(response: response, text: Faker::FunnyName.two_word_name)
     end
-    game.open_voting
-    GameChannel.broadcast_to(game, game.to_socket_json)
+
     render json: game.as_json
   end
 end

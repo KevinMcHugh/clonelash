@@ -13,6 +13,7 @@ class UpdateResponse
           Vote.create(player: player, game_prompt: game_prompt, response: nil)
         end
       end
+      game.open_voting
       GameChannel.broadcast_to(game, game.to_socket_json)
     end
   end
