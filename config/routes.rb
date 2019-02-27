@@ -7,5 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :responses
+  namespace :admin do
+    post :add_player
+  end
   mount ActionCable.server => '/cable'
 end

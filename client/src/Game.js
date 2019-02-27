@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
+import Admin from './Admin';
 import Players from './Players';
 import PlayerMessages from './PlayerMessages';
 import Cookies from 'universal-cookie';
@@ -73,6 +74,7 @@ class Game extends Component {
               {this.state.game.state}
               {this._renderStartOrWait()}
               <Players game_id={this.props.params.id} player={this.state.player} />
+              <Admin game_id={this.props.params.id}/>
             </header>
           </div>
         </ActionCableProvider>
