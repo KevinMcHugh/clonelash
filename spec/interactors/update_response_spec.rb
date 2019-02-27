@@ -4,10 +4,13 @@ RSpec.describe UpdateResponse do
   describe '#call' do
     let(:game) { Game.create }
     let(:prompt) { Prompt.create }
-    let(:player) { Player.create(game: game) }
+    let(:player_1) { Player.create(game: game) }
+    let(:player_2) { Player.create(game: game) }
+    let!(:player_3) { Player.create(game: game) }
+
     let(:game_prompt) { GamePrompt.create(game: game, prompt: prompt) }
-    let!(:response_one) { Response.create(game_prompt: game_prompt, player: player) }
-    let!(:response_two) { Response.create(game_prompt: game_prompt, player: player) }
+    let!(:response_one) { Response.create(game_prompt: game_prompt, player: player_1) }
+    let!(:response_two) { Response.create(game_prompt: game_prompt, player: player_2) }
     subject { described_class.call(response: response_one, text: 'foo') }
 
     context 'not the final response' do
@@ -32,6 +35,10 @@ RSpec.describe UpdateResponse do
       it 'makes a broadcast' do
         expect(GameChannel).to receive(:broadcast_to)
         subject
+      end
+
+      it 'creates Votes for appropriate players' do
+        expect{subject}.to change{Vote.count}.by(1)
       end
     end
   end
