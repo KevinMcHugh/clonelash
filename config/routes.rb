@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :responses
   namespace :admin do
     post :add_player
+    post :answer_questions
   end
   mount ActionCable.server => '/cable'
 end

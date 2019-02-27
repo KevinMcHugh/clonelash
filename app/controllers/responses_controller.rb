@@ -3,7 +3,7 @@ class ResponsesController < ApplicationController
 
   def update
     response = Response.find(params[:id])
-    UpdateResponse.call(update_params)
+    UpdateResponse.call(update_params.merge(response: response))
     render json: response.as_json
   end
 

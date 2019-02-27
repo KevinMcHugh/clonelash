@@ -13,7 +13,7 @@ class Game < ApplicationRecord
   include SocketSendable
   has_many :players
   has_many :game_prompts
-  has_many :responses, through: :game_prompts, source: :game_prompt
+  has_many :responses, through: :game_prompts
 
   aasm column: :state do
     state :created, initial: true

@@ -5,8 +5,8 @@ class UpdateResponse
     response = context.response
     response.update_attributes(text: context.text)
 
-    if response.game.all_responses_received?
-      GameChannel.broadcast
+    if response.game_prompt.game.all_responses_received?
+      GameChannel.broadcast(game, game.to_socket_json)
     end
   end
 end
