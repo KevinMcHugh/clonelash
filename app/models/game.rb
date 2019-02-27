@@ -59,6 +59,6 @@ class Game < ApplicationRecord
   end
 
   def all_responses_received?
-    game_prompts.any? && game_prompts.flat_map(&:responses).all? { |r| r.text.present? }
+    responses.any? && responses.count == responses.where.not(text: nil).count
   end
 end
