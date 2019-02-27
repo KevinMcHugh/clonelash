@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_210209) do
+ActiveRecord::Schema.define(version: 2019_02_27_035926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -58,9 +58,23 @@ ActiveRecord::Schema.define(version: 2019_02_23_210209) do
     t.index ["player_id"], name: "index_responses_on_player_id"
   end
 
+  create_table "votes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "game_prompt_id", null: false
+    t.uuid "response_id", null: false
+    t.uuid "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_prompt_id"], name: "index_votes_on_game_prompt_id"
+    t.index ["player_id"], name: "index_votes_on_player_id"
+    t.index ["response_id"], name: "index_votes_on_response_id"
+  end
+
   add_foreign_key "game_prompts", "games"
   add_foreign_key "game_prompts", "prompts"
   add_foreign_key "players", "games"
   add_foreign_key "responses", "game_prompts"
   add_foreign_key "responses", "players"
+  add_foreign_key "votes", "game_prompts"
+  add_foreign_key "votes", "players"
+  add_foreign_key "votes", "responses"
 end

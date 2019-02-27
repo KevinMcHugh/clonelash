@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
 
   resources :responses
+  resources :votes
+
   namespace :admin do
     post :add_player
     post :answer_questions

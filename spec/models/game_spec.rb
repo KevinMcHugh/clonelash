@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id         :uuid             not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  state      :string
+#
+
 require 'rails_helper'
 
 RSpec.describe Game do 
