@@ -16,7 +16,7 @@ class GamesController < ApplicationController
   def update
     game = Game.find(params[:id])
     game.update_attributes(update_params)
-    if params[:state] == "started"
+    if update_params[:state] == "started"
       create_prompts(game)
     end
     GameChannel.broadcast_to(game, game.to_socket_json)
