@@ -93,7 +93,7 @@ class Game extends Component {
   _renderStartOrWait() {
     if (this.state.game.state == "created") {
       if (this.state.game.startable) {
-        return (<button onClick={this._startGame}>Start the game now!</button>)
+        return (<button onClick={(e) => this._startGame(e)}>Start the game now!</button>)
       } else {
         return (<div> Waiting for more players! </div>)
       }
@@ -124,7 +124,7 @@ class Game extends Component {
         )
       }
     } else {
-      return (<PlayerMessages playerId={this.state.player.id} />)
+      return (<PlayerMessages playerId={this.state.player.id} game={this.state.game} />)
     }
   }
 }

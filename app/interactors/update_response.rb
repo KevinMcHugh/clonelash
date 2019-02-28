@@ -10,10 +10,10 @@ class UpdateResponse
       game.game_prompts.each do |game_prompt|
         get_to_vote = players - game_prompt.responses.map(&:player)
         get_to_vote.each do |player|
-          Vote.create(player: player, game_prompt: game_prompt, response: nil)
+          Vote.find_or_create_by(player: player, game_prompt: game_prompt, response: nil)
         end
       end
-      game.open_voting
+      game.open_voting!
       GameChannel.broadcast_to(game, game.to_socket_json)
     end
   end

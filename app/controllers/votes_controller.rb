@@ -3,7 +3,7 @@ class VotesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    votes = Vote.where(player: params[:player_id])
+    votes = Vote.where(player: params[:player_id], response: nil)
 
     render json: votes
   end

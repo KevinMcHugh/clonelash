@@ -15,4 +15,20 @@ class Vote < ApplicationRecord
   belongs_to :game_prompt
   belongs_to :response, optional: true
   belongs_to :player
+
+  def as_json(options={})
+    {
+      id: id,
+      response_id: response&.id,
+      game_prompt: {
+        text: game_prompt.prompt.text
+      },
+      responses: game_prompt.responses.map do |response|
+        {
+          id: response.id,
+          text: response.text
+        }
+      end
+    }
+  end
 end
