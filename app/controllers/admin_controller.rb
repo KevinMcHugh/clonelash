@@ -17,4 +17,18 @@ class AdminController < ApplicationController
 
     render json: game.as_json
   end
+
+  def complete_votes
+    game = Game.find(params[:game_id])
+    # TODO make this bit work with a nice join-based query
+    game.game_prompts.find_each do |game_prompt|
+      game_prompt.votes.where(response: nil).each do |vote|
+        UpdateVote.call(vote: vote, response_id: vote.game_prompt.responses.first.id)
+      end
+    end
+
+    render json: game.as_json
+  end
+
+
 end

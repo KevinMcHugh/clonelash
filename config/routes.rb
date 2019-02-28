@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   namespace :admin do
     post :add_player
     post :answer_questions
+    post :complete_votes
   end
   mount ActionCable.server => '/cable'
 end
