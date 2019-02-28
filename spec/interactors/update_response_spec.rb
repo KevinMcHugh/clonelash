@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UpdateResponse do
   describe '#call' do
-    let(:game) { Game.create }
+    let(:game) { Game.create(state: 'started') }
     let(:prompt) { Prompt.create }
     let(:player_1) { Player.create(game: game) }
     let(:player_2) { Player.create(game: game) }

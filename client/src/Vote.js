@@ -48,41 +48,45 @@ class Vote extends Component {
           <ActionCableConsumer
             channel={channel}
             onReceived={this.handleReceivedPlayerMessage} />
-          { this._renderMessage() }
+          { this._renderVote() }
         </div>
       )
     }
   }
 
-  _onSubmit = (e,messageId) => {
-    e.preventDefault()
-    const text = e.target.elements[0].value
-    axios.put('http://localhost:3001/responses/' + messageId,
-      {text: text})
+  _onClick = (e,voteId,responseId) => {
+    // e.preventDefault()
+    axios.put('http://localhost:3001/votes/' + voteId,
+      {response_id: responseId})
       .then(response => {
-        let prompts = this.state.prompts
-        _.remove(prompts, {id: response.data.id})
+        // actually probably want to leave this up while votes roll in...
+        let responsesToVoteOn = this.state.responsesToVoteOn
+        _.remove(responsesToVoteOn, {id: response.data.id})
         this.setState({
-          prompts
+          responsesToVoteOn
         })
     }).catch(error => console.log(error))
   }
 
-  _renderMessage() {
-    const message = _.first(this.state.responsesToVoteOn)
-    if (message) {
+  _renderVote() {
+    const vote = _.first(this.state.responsesToVoteOn)
+    if (vote) {
       return (
         <div>
-          vote now: {message.game_prompt.text}
-          <div>{ this._renderResponses(message) }</div>
+          vote now: {vote.game_prompt.text}
+          <div>{ this._renderResponses(vote) }</div>
         </div>
       )
     }
   }
 
-  _renderResponses(message) {
-    return message.responses.map((response) => {
-      return (<button key={response.id}>{response.text}</button>)
+  _renderResponses(vote) {
+    return vote.responses.map((response) => {
+      return (
+        <button key={response.id} onClick={(e) => this._onClick(e,vote.id,response.id)}>
+          {response.text}
+        </button>
+      )
     })
   }
 }

@@ -14,4 +14,9 @@ class GamePrompt < ApplicationRecord
   belongs_to :game
   belongs_to :prompt
   has_many :responses
+  has_many :votes
+
+  def all_votes_received?
+    votes.any? && votes.all?(&:response)
+  end
 end

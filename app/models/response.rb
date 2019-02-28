@@ -15,6 +15,7 @@ class Response < ApplicationRecord
 
   belongs_to :game_prompt
   belongs_to :player
+  has_many :votes
 
   def as_json(options={})
     {

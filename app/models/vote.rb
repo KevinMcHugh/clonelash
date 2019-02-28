@@ -14,7 +14,7 @@ class Vote < ApplicationRecord
   include SocketSendable
   belongs_to :game_prompt
   belongs_to :response, optional: true
-  belongs_to :player
+  belongs_to :player, optional: true
 
   def as_json(options={})
     {
