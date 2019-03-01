@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+.App-player {
+  height: 40%;
+  padding-top: 25%;
+}
+
 .App-body {
   height: 80%;
 }

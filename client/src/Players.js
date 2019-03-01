@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
 import { API_WS_ROOT } from './constants';
+import './Players.css';
 
 class Players extends Component {
 
@@ -39,12 +40,16 @@ class Players extends Component {
     const playerId = (this.props.player || {}).id
     if (this.state.players) {
       return (
-        <div>
+        <div className='Player-container'>
           <ActionCableConsumer
             channel={channel}
             onReceived={this.handleReceivedPlayer} />
           {this.state.players.map (player => {
-            return (<div key={player.id}>{player.name} {player.id === playerId ? "*" : "" }</div>)
+            return (
+              <div key={player.id} className={player.id === playerId ? 'Player Player-current' : 'Player' }>
+                {player.name}
+              </div>
+            )
           })}
         </div>
       )

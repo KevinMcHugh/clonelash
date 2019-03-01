@@ -1,0 +1,14 @@
+.Player {
+  border-style: dashed;
+  transform: rotate(30deg);
+  font-size: 18px;
+}
+
+.Player-current {
+  border-color: yellow;
+}
+
+.Player-container {
+  display: flex;
+  height: 10%;
+}
