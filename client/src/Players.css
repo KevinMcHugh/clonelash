@@ -2,6 +2,7 @@
   border-style: dashed;
   transform: rotate(30deg);
   font-size: 18px;
+  min-width: 66px;
 }
 
 .Player-current {
