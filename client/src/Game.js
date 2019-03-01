@@ -70,12 +70,15 @@ class Game extends Component {
             <ActionCableConsumer channel={gameChannel}
                                  onReceived={this.handleReceivedGame} />
             <header className="App-header">
-              {this._renderPlayer()}
+              {this.state.game.state}
             </header>
-            {this.state.game.state}
-            {this._renderStartOrWait()}
-            <Players game_id={this.props.params.id} player={this.state.player} />
-            <Admin game_id={this.props.params.id}/>
+            <div className="App-body">
+              {this._renderStartOrWait()}
+              <Players game_id={this.props.params.id} player={this.state.player} />
+            </div>
+            <footer className="App-footer">
+              <Admin game_id={this.props.params.id}/>
+            </footer>
           </div>
         </ActionCableProvider>
       )

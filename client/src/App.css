@@ -13,11 +13,15 @@
 }
 
 .App-header {
-  min-height: 100px;
+  height: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.App-footer {
+  height: 10%;
 }
 
 .App-link {
@@ -25,7 +29,7 @@
 }
 
 .App-body {
-  height: 100%;
+  height: 80%;
 }
 @keyframes App-logo-spin {
   from {
