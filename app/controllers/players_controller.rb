@@ -5,6 +5,7 @@ class PlayersController < ApplicationController
   def create
     player = Player.create(game_id: params[:game_id], name: params[:name])
     GameChannel.broadcast_to(player.game, player.to_socket_json)
+    GameChannel.broadcast_to(player.game, player.game.to_socket_json)
 
     render json: player
   end
