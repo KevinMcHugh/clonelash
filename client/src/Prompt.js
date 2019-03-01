@@ -13,7 +13,7 @@ class Prompt extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/players/' + this.props.playerId + '/prompts')
+    axios.get('api/players/' + this.props.playerId + '/prompts')
       .then(response => {
         this.setState({
           prompts: response.data,
@@ -57,7 +57,7 @@ class Prompt extends Component {
   _onSubmit = (e,messageId) => {
     e.preventDefault()
     const text = e.target.elements[0].value
-    axios.put('http://localhost:3001/responses/' + messageId,
+    axios.put('api/responses/' + messageId,
       {text: text})
       .then(response => {
         let prompts = this.state.prompts

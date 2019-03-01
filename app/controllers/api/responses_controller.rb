@@ -1,4 +1,4 @@
-class ResponsesController < ApplicationController
+class Api::ResponsesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def update

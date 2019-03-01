@@ -13,7 +13,7 @@ class Vote extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/votes',
+    axios.get('api/votes',
       { params: { player_id: this.props.playerId, foo: 'bar' }})
       .then(response => {
         this.setState({
@@ -56,7 +56,7 @@ class Vote extends Component {
 
   _onClick = (e,voteId,responseId) => {
     // e.preventDefault()
-    axios.put('http://localhost:3001/votes/' + voteId,
+    axios.put('api/votes/' + voteId,
       {response_id: responseId})
       .then(response => {
         // actually probably want to leave this up while votes roll in...

@@ -1,4 +1,4 @@
-class PlayersController < ApplicationController
+class Api::PlayersController < ApplicationController
   # tempppp
   skip_before_action :verify_authenticity_token
 

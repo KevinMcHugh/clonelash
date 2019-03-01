@@ -1,4 +1,4 @@
-class AdminController < ApplicationController
+class Api::AdminController < ApplicationController
   # tempppp
   skip_before_action :verify_authenticity_token
 

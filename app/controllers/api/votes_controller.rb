@@ -1,4 +1,4 @@
-class VotesController < ApplicationController
+class Api::VotesController < ApplicationController
   # tempppp
   skip_before_action :verify_authenticity_token
 

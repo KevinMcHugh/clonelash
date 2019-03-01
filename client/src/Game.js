@@ -20,7 +20,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3001/games/' + this.props.params.id)
+    axios.get('api/games/' + this.props.params.id)
       .then(response => {
         this.setState({
           game: response.data
@@ -28,7 +28,7 @@ class Game extends Component {
     }).catch(error => console.log(error))
     const cookies = new Cookies();
     if (cookies.get('player_id')) {
-      axios.get('http://localhost:3001/players/' + cookies.get('player_id'))
+      axios.get('api/players/' + cookies.get('player_id'))
         .then(response => {
           this.setState({
             player: response.data
@@ -48,7 +48,7 @@ class Game extends Component {
   _onSubmit = (e) => {
     e.preventDefault()
     const name = e.target.elements[0].value
-    axios.post('http://localhost:3001/players',
+    axios.post('api/players',
       {game_id: this.props.params.id, name: name})
       .then(response => {
         const cookies = new Cookies();
@@ -106,7 +106,7 @@ class Game extends Component {
 
   _startGame = (e) => {
     e.preventDefault()
-    axios.put('http://localhost:3001/games/' + this.props.params.id,
+    axios.put('api/games/' + this.props.params.id,
       {game: { state: 'started'}})
       .then(response => {
         this.setState({
