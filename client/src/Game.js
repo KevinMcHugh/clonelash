@@ -38,7 +38,7 @@ class Game extends Component {
   }
 
   handleReceivedGame = (response) => {
-    if (response.message_type == 'Game') {
+    if (response.message_type === 'Game') {
       this.setState({
         game: response
       })
@@ -91,7 +91,7 @@ class Game extends Component {
   }
 
   _renderStartOrWait() {
-    if (this.state.game.state == "created") {
+    if (this.state.game.state === "created") {
       if (this.state.game.startable) {
         return (<button onClick={(e) => this._startGame(e)}>Start the game now!</button>)
       } else {
