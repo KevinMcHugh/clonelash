@@ -42,7 +42,7 @@ class Prompt extends Component {
     } else if (_.isEmpty(this.state.prompts)) {
       return (<div>Wait for other players...</div>)
     }
-    if (_.any(this.state.prompts)) {
+    if (!_.isEmpty(this.state.prompts)) {
       return (
         <div>
           <ActionCableConsumer
