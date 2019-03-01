@@ -11,4 +11,5 @@
 .Player-container {
   display: flex;
   height: 10%;
+  justify-content: center;
 }
