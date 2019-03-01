@@ -43,6 +43,7 @@ gem 'rack-cors'
 gem 'interactor'
 gem 'rspec'
 gem 'faker'
+gem 'foreman'
 
 group :development, :test do
   # pry as console/debugger
