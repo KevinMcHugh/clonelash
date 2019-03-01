@@ -71,11 +71,11 @@ class Game extends Component {
                                  onReceived={this.handleReceivedGame} />
             <header className="App-header">
               {this._renderPlayer()}
-              {this.state.game.state}
-              {this._renderStartOrWait()}
-              <Players game_id={this.props.params.id} player={this.state.player} />
-              <Admin game_id={this.props.params.id}/>
             </header>
+            {this.state.game.state}
+            {this._renderStartOrWait()}
+            <Players game_id={this.props.params.id} player={this.state.player} />
+            <Admin game_id={this.props.params.id}/>
           </div>
         </ActionCableProvider>
       )
