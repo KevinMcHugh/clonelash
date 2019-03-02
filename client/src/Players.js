@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
-import { API_WS_ROOT } from './constants';
+import { ActionCableConsumer } from 'react-actioncable-provider';
 import './Players.css';
 
 class Players extends Component {
@@ -23,7 +22,7 @@ class Players extends Component {
   }
 
   handleReceivedPlayer = (response) => {
-    if (response.message_type == 'Player') {
+    if (response.message_type === 'Player') {
       let players = this.state.players;
       if (!players.some(p => p.id === response.id)) {
         players.push(response)

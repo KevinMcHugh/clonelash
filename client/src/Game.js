@@ -119,7 +119,7 @@ class Game extends Component {
 
   _renderPlayer() {
     if (!this.state.player) {
-      if (this.state.game.state != 'created') {
+      if (this.state.game.state !== 'created') {
         return <div> Sorry, you are too late to join the game, but have fun voting!</div>
       } else {
         return (

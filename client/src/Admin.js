@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Admin extends Component {
-
-  constructor(props){
-    super(props)
-  }
-
   _addAPlayer = (e) => {
     e.preventDefault()
     axios.post('admin/add_player',
