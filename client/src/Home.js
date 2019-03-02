@@ -29,7 +29,7 @@ class Home extends Component {
           Stink Buttsmell
 
           {this.state.games.map (game => {
-            return (<a key={game.id} href={"/games/" + game.id }> {game.id} </a>)
+            return (<a key={game.id} href={"games/" + game.id }> {game.id} </a>)
           })}
 
         </header>
