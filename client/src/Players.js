@@ -14,7 +14,7 @@ class Players extends Component {
   }
 
   componentDidMount() {
-    axios.get('api/games/' + this.props.game_id + '/players')
+    axios.get('games/' + this.props.game_id + '/players')
       .then(response => {
         this.setState({
           players: response.data

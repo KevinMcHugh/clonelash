@@ -4,6 +4,7 @@ import './index.css';
 import history from './utils/history';
 import router from './utils/router';
 import routes from './utils/routes';
+import axios from 'axios';
 const container = document.getElementById('root');
 
 function renderComponent(component) {
@@ -15,6 +16,7 @@ function render(location) {
     .catch(error => router.resolve(routes, { ...location, error })
     .then(renderComponent));
 }
+axios.defaults.baseURL = "/api"
 render(history.getCurrentLocation()); // render the current URL
 history.listen(render);               // render subsequent URLs
 

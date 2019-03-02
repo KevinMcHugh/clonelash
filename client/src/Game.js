@@ -20,7 +20,9 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    axios.get('api/games/' + this.props.params.id)
+    axios.defaults.baseURL = "/api"
+
+    axios.get('games/' + this.props.params.id)
       .then(response => {
         this.setState({
           game: response.data
@@ -28,7 +30,7 @@ class Game extends Component {
     }).catch(error => console.log(error))
     const cookies = new Cookies();
     if (cookies.get('player_id')) {
-      axios.get('api/players/' + cookies.get('player_id'))
+      axios.get('players/' + cookies.get('player_id'))
         .then(response => {
           this.setState({
             player: response.data

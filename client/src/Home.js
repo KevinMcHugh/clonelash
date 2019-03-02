@@ -12,7 +12,9 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    axios.get('api/games.json')
+    axios.defaults.baseURL = "/api"
+
+    axios.get('games.json')
       .then(response => {
         this.setState({
           games: response.data

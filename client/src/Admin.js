@@ -9,21 +9,21 @@ class Admin extends Component {
 
   _addAPlayer = (e) => {
     e.preventDefault()
-    axios.post('api/admin/add_player',
+    axios.post('admin/add_player',
       {game_id: this.props.game_id}
     ).catch(error => console.log(error))
   }
 
   _answerQuestions = (e) => {
     e.preventDefault()
-    axios.post('api/admin/answer_questions',
+    axios.post('admin/answer_questions',
       {game_id: this.props.game_id}
     ).catch(error => console.log(error))
   }
 
   _completeVotes = (e) => {
     e.preventDefault()
-    axios.post('api/admin/complete_votes',
+    axios.post('admin/complete_votes',
       {game_id: this.props.game_id}
     ).catch(error => console.log(error))
   }

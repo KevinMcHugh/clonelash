@@ -13,7 +13,7 @@ class Vote extends Component {
   }
 
   componentDidMount() {
-    axios.get('api/votes',
+    axios.get('votes',
       { params: { player_id: this.props.playerId, foo: 'bar' }})
       .then(response => {
         this.setState({
