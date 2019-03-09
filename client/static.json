@@ -3,6 +3,6 @@
   "clean_urls": true,
   "error_page": "n",
   "routes": {
-    "games/*": "index.html"
+    "/**": "index.html"
   }
 }
