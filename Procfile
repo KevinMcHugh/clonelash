@@ -1,3 +1,3 @@
 web: npm run start
-client: run client
+client: npm run client
 api: bundle exec rails s
