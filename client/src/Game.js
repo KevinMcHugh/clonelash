@@ -65,9 +65,10 @@ class Game extends Component {
   render() {
     const gameChannel = { channel: 'GameChannel', id: this.props.id }
 
+// that host doesn't work for dev, fwiw
     if (this.state.game) {
       return (
-        <ActionCableProvider url={API_WS_ROOT}>
+        <ActionCableProvider url={"ws://" + window.location.host + "/cable"}>
           <div className="App">
             <ActionCableConsumer channel={gameChannel}
                                  onReceived={this.handleReceivedGame} />
