@@ -26,7 +26,7 @@ class Home extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          Stink Buttsmell
+          Stink Buttsmell 3
 
           {this.state.games.map (game => {
             return (<a key={game.id} href={"games/" + game.id }> {game.id} </a>)
