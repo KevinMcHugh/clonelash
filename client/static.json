@@ -3,7 +3,6 @@
   "routes": {
     "/**": "index.html",
     "**": "index.html",
-    "a/**": "index.html",
-    "/a/**": "index.html"
+    "a/**": "index.html"
   }
 }
