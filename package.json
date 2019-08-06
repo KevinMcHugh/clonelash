@@ -2,26 +2,15 @@
   "name": "clonelash",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=8.10"
-  },
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node client/src/server.js",
+    "start": "npm run build --prefix client && node client/src/server.js",
     "server": "node client/src/server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "cd client && npm run build"
+    "client": "npm run build --prefix client && npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "concurrently": "^4.1.0",
-    "react-dom": "^16.8.6",
-    "react-scripts": "^2.1.8",
-    "history": "^3.3.0",
-    "http-proxy-middleware": "^0.19.1",
-    "react": "^16.8.6",
-    "react-actioncable-provider": "^2.0.0",
-    "universal-cookie": "^3.0.7"
+    "concurrently": "^4.1.0"
   }
 }
