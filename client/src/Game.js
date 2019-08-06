@@ -22,7 +22,7 @@ class Game extends Component {
   componentDidMount() {
     axios.defaults.baseURL = "/api"
 
-    axios.get('games/' + this.props.params.id)
+    axios.get('games/' + this.props.id)
       .then(response => {
         this.setState({
           game: response.data
@@ -51,7 +51,7 @@ class Game extends Component {
     e.preventDefault()
     const name = e.target.elements[0].value
     axios.post('api/players',
-      {game_id: this.props.params.id, name: name})
+      {game_id: this.props.id, name: name})
       .then(response => {
         const cookies = new Cookies();
         cookies.set('player_id', response.data.id, { path: '/' });
@@ -63,7 +63,7 @@ class Game extends Component {
   }
 
   render() {
-    const gameChannel = { channel: 'GameChannel', id: this.props.params.id }
+    const gameChannel = { channel: 'GameChannel', id: this.props.id }
 
     if (this.state.game) {
       return (
@@ -77,10 +77,10 @@ class Game extends Component {
             <div className="App-body">
               {this._renderStartOrWait()}
               <div className="App-player">{this._renderPlayer()}</div>
-              <Players game_id={this.props.params.id} player={this.state.player} />
+              <Players game_id={this.props.id} player={this.state.player} />
             </div>
             <footer className="App-footer">
-              <Admin game_id={this.props.params.id}/>
+              <Admin game_id={this.props.id}/>
             </footer>
           </div>
         </ActionCableProvider>
