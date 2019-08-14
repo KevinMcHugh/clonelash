@@ -56,7 +56,7 @@ class Vote extends Component {
 
   _onClick = (e,voteId,responseId) => {
     // e.preventDefault()
-    axios.put('api/votes/' + voteId,
+    axios.put('votes/' + voteId,
       {response_id: responseId})
       .then(response => {
         // actually probably want to leave this up while votes roll in...

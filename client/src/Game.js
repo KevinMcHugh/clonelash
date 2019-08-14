@@ -6,7 +6,6 @@ import Players from './Players';
 import PlayerMessages from './PlayerMessages';
 import Cookies from 'universal-cookie';
 import { ActionCableProvider, ActionCableConsumer } from 'react-actioncable-provider';
-import { API_WS_ROOT } from './constants';
 
 class Game extends Component {
 
@@ -28,6 +27,7 @@ class Game extends Component {
           game: response.data
         })
     }).catch(error => console.log(error))
+
     const cookies = new Cookies();
     if (cookies.get('player_id')) {
       axios.get('players/' + cookies.get('player_id'))
@@ -65,10 +65,11 @@ class Game extends Component {
   render() {
     // that host doesn't work for dev, fwiw, and the scheme will have to be ws in dev.
     const gameChannel = { channel: 'GameChannel', id: this.props.id }
-
+    const protocol = (window.location.protocol == "http:" ? "ws://" : "wss://")
+    const port = (!!window.location.port ? ":3001" : "")
     if (this.state.game) {
       return (
-        <ActionCableProvider url={"wss://" + window.location.host + "/cable"}>
+        <ActionCableProvider url={protocol + window.location.hostname + port + "/cable"}>
           <div className="App">
             <ActionCableConsumer channel={gameChannel}
                                  onReceived={this.handleReceivedGame} />
@@ -109,7 +110,7 @@ class Game extends Component {
 
   _startGame = (e) => {
     e.preventDefault()
-    axios.put('games/' + this.props.params.id,
+    axios.put('games/' + this.props.id,
       {game: { state: 'started'}})
       .then(response => {
         this.setState({

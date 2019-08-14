@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import _ from 'lodash';
 import './App.css';
 import Game from './Game';
 
@@ -45,7 +44,6 @@ class Home extends Component {
 
   onClick = (gameId) => {
     this.setState({ gameId })
-    console.log(gameId)
   };
 }
 
