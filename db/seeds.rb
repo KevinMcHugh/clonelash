@@ -16,6 +16,9 @@
   { text: 'Everyone knows that monkeys hate "BLANK"', format: :fill_in_the_blank},
   { text: 'The biggest downside to living in Hell', format: :misc},
   { text: "Jesus's REAL last words", format: :quote}
+  { text: 'If a genie gives you three wishes, the best things to wish for are: 1) a billion dollars, 2) eternal life, and 3) <BLANK>', format: :fill_in_the_blank},
+  { text: 'What an alarm clock could say that would wake you right up', format: :quote },
+  { text: 'The biggest issue facing the town of Margaritaville', format: :misc }
 ].each do |hash|
   Prompt.create(hash)
 end

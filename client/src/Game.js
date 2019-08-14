@@ -63,7 +63,6 @@ class Game extends Component {
   }
 
   render() {
-    // that host doesn't work for dev, fwiw, and the scheme will have to be ws in dev.
     const gameChannel = { channel: 'GameChannel', id: this.props.id }
     const protocol = (window.location.protocol == "http:" ? "ws://" : "wss://")
     const port = (!!window.location.port ? ":3001" : "")

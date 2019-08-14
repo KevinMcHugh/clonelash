@@ -18,5 +18,9 @@ RSpec.describe CreateGamePrompts do
         expect(Response.where(player: player).count).to eq(4)
       end
     end
+
+    context 'insufficient prompts' do
+      pending 'Test failure scenarios.'
+    end
   end
 end

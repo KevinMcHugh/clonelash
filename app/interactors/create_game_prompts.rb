@@ -15,6 +15,8 @@ class CreateGamePrompts
       end
     end
 
+    context.fail!(error: "Insufficient prompts!!") unless Prompt.count >= pairs.count
+
     prompts = Prompt.order(Arel.sql("RANDOM()")).first(pairs.count)
 
     pairs.each_with_index do |permutation, index|
