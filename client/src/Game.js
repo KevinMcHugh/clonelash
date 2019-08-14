@@ -50,7 +50,7 @@ class Game extends Component {
   _onSubmit = (e) => {
     e.preventDefault()
     const name = e.target.elements[0].value
-    axios.post('api/players',
+    axios.post('players',
       {game_id: this.props.id, name: name})
       .then(response => {
         const cookies = new Cookies();
@@ -63,9 +63,9 @@ class Game extends Component {
   }
 
   render() {
+    // that host doesn't work for dev, fwiw, and the scheme will have to be ws in dev.
     const gameChannel = { channel: 'GameChannel', id: this.props.id }
 
-    // that host doesn't work for dev, fwiw, and the scheme will have to be ws in dev.
     if (this.state.game) {
       return (
         <ActionCableProvider url={"wss://" + window.location.host + "/cable"}>
@@ -109,7 +109,7 @@ class Game extends Component {
 
   _startGame = (e) => {
     e.preventDefault()
-    axios.put('api/games/' + this.props.params.id,
+    axios.put('games/' + this.props.params.id,
       {game: { state: 'started'}})
       .then(response => {
         this.setState({
