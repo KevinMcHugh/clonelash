@@ -1,3 +1,3 @@
-if ENV['REDIS_URL']
-  $redis = Redis.new(url: ENV['REDIS_URL'])
+if ENV['REDISTOGO_URL']
+  $redis = Redis.new(url: ENV['REDISTOGO_URL'])
 end
