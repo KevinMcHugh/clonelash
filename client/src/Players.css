@@ -3,10 +3,11 @@
   transform: rotate(30deg);
   font-size: 18px;
   min-width: 66px;
+  border-color: darkgray;
 }
 
 .Player-current {
-  border-color: yellow;
+  border-color: white;
 }
 
 .Player-container {
