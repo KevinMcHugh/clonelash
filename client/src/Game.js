@@ -68,7 +68,7 @@ class Game extends Component {
 
     if (this.state.game) {
       return (
-        <ActionCableProvider url={"wss://" + window.location.host + "/cable"}>
+        <ActionCableProvider url={"ws://" + window.location.host + "/cable"}>
           <div className="App">
             <ActionCableConsumer channel={gameChannel}
                                  onReceived={this.handleReceivedGame} />
