@@ -19,6 +19,7 @@ class Game < ApplicationRecord
     state :created, initial: true
     state :started
     state :voting_opened
+    state :voting_closed
     state :final_question_opened
     state :final_voting_opened
     state :finished
@@ -29,6 +30,10 @@ class Game < ApplicationRecord
 
     event :open_voting do
       transitions from: :started, to: :voting_opened
+    end
+
+    event :close_voting do
+      transitions from: :voting_opened, to: :voting_closed
     end
 
     event :open_final_question do
@@ -60,5 +65,9 @@ class Game < ApplicationRecord
 
   def all_responses_received?
     responses.any? && responses.count == responses.where.not(text: nil).count
+  end
+
+  def all_votes_received?
+    game_prompts.any? && game_prompts.all?(&:all_votes_received?)
   end
 end

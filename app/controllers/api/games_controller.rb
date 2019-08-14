@@ -1,7 +1,7 @@
 class Api::GamesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def index 
+  def index
     render json: Game.all.map(&:as_json)
   end
 

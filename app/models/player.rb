@@ -9,8 +9,17 @@
 #  updated_at :datetime         not null
 #
 
+# TODO: add admin?
 class Player < ApplicationRecord
   include SocketSendable
   belongs_to :game
   has_many :responses
+
+  def score
+    Vote.where(response: responses).count
+  end
+
+  def as_json(options={})
+    super.merge('score' => score)
+  end
 end

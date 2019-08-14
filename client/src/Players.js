@@ -47,6 +47,7 @@ class Players extends Component {
             return (
               <div key={player.id} className={player.id === playerId ? 'Player Player-current' : 'Player' }>
                 {player.name}
+                <div>Score: {player.score}</div>
               </div>
             )
           })}
