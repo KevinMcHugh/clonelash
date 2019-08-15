@@ -32,10 +32,6 @@ class Game < ApplicationRecord
       transitions from: :started, to: :voting_opened
     end
 
-    event :close_voting do
-      transitions from: :voting_opened, to: :voting_closed
-    end
-
     event :open_final_question do
       transitions from: :voting_opened, to: :final_question_opened
     end

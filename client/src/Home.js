@@ -31,7 +31,7 @@ class Home extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          Stink Buttsmell 2
+          This is not Quiplash
 
           {this.state.games.map (game => {
             return (<a key={game.id} onClick={() => this.onClick(game.id)}> {game.id} </a>)

@@ -12,7 +12,8 @@ class UpdateVote
       # check all game_prompt's have received all votes.
       if vote.game_prompt.game.all_votes_received?
         # TODO create final question
-        game.close_voting!
+        game.open_final_voting!
+        GamePrompt.create(Prompt.where(for_all_players: true), game: game)
         GameChannel.broadcast_to(game, game.to_socket_json)
       end
     end

@@ -15,10 +15,10 @@
   { text: 'If a winning coach gets Gatorade dumped on his head, what should get dumped on the losing coach?', format: :misc},
   { text: 'Everyone knows that monkeys hate "BLANK"', format: :fill_in_the_blank},
   { text: 'The biggest downside to living in Hell', format: :misc},
-  { text: "Jesus's REAL last words", format: :quote}
+  { text: "Jesus's REAL last words", format: :quote},
   { text: 'If a genie gives you three wishes, the best things to wish for are: 1) a billion dollars, 2) eternal life, and 3) <BLANK>', format: :fill_in_the_blank},
   { text: 'What an alarm clock could say that would wake you right up', format: :quote },
-  { text: 'The biggest issue facing the town of Margaritaville', format: :misc }
+  { text: 'The biggest issue facing the town of Margaritaville', format: :misc, for_all_players: true }
 ].each do |hash|
   Prompt.create(hash)
 end
