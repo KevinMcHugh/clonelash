@@ -17,7 +17,7 @@ class Api::GamesController < ApplicationController
     game = Game.create
     player = Player.create(game: game, name: create_params[:player_name], admin: true)
     game.update_attributes(started_by: player)
-    # No one could be subscribed to this, right? 
+    # No one could be subscribed to this, right?
     # GameChannel.broadcast_to(game, game.to_socket_json)
     render json: game.as_json
   end

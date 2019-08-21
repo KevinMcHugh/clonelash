@@ -2,10 +2,11 @@
 #
 # Table name: games
 #
-#  id         :uuid             not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  state      :string
+#  id            :uuid             not null, primary key
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  state         :string
+#  started_by_id :uuid
 #
 
 require 'rails_helper'

@@ -2,16 +2,17 @@
 #
 # Table name: games
 #
-#  id         :uuid             not null, primary key
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  state      :string
+#  id            :uuid             not null, primary key
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  state         :string
+#  started_by_id :uuid
 #
 
 class Game < ApplicationRecord
   include AASM
   include SocketSendable
-  has_one :started_by, class_name: Player.name
+  belongs_to :started_by, class_name: Player.name, optional: true
   has_many :players
   has_many :game_prompts
   has_many :responses, through: :game_prompts
@@ -52,7 +53,8 @@ class Game < ApplicationRecord
       state: state,
       created_at: created_at,
       updated_at: updated_at,
-      startable: startable?
+      startable: startable?,
+      started_by_id: started_by_id
     }
   end
 

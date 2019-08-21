@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import Game from './Game';
+import Cookies from 'universal-cookie';
 
 class Home extends Component {
 
@@ -27,7 +28,7 @@ class Home extends Component {
 
   render() {
     if (this.state.gameId) {
-      return <Game id={this.state.gameId} />
+      return <Game id={this.state.gameId} setPlayerCookie={this._setPlayerCookie} />
     }
     return (
       <div className="App">
@@ -56,12 +57,18 @@ class Home extends Component {
   _onSubmit = (e) => {
     e.preventDefault()
     axios.post('games.json', { game: { player_name: this.state.playerName }}).then(response => {
+      this._setPlayerCookie(response.data.started_by_id)
       this.setState({gameId: response.data.id })
     })
   }
 
   _onInputChange = (e) => {
     this.setState({ playerName: e.target.value})
+  }
+
+  _setPlayerCookie(playerId) {
+    const cookies = new Cookies();
+    cookies.set('player_id', playerId, { path: '/' });
   }
 }
 

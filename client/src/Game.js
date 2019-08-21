@@ -53,9 +53,7 @@ class Game extends Component {
     axios.post('players',
       {game_id: this.props.id, name: name})
       .then(response => {
-        const cookies = new Cookies();
-        cookies.set('player_id', response.data.id, { path: '/' });
-
+        this.props.setPlayerCookie(response.data.id)
         this.setState({
           player: response.data,
         })
