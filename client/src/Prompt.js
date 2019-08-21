@@ -30,7 +30,7 @@ class Prompt extends Component {
       this.setState({
         prompts
       });
-    } 
+    }
   }
 
   render() {
@@ -75,7 +75,7 @@ class Prompt extends Component {
         <div>
           Answer this question: {message.game_prompt.text}
           <form onSubmit={(e) => this._onSubmit(e,message.id)}>
-            <input name="text" />
+            <input name="text"/>
             <button>OK</button>
           </form>
         </div>

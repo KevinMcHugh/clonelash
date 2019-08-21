@@ -9,7 +9,8 @@ class Home extends Component {
     super(props)
     this.state = {
       games: [],
-      gameId: null
+      gameId: null,
+      playerName: null
     }
   }
 
@@ -37,6 +38,12 @@ class Home extends Component {
             return (<a key={game.id} onClick={() => this.onClick(game.id)}> {game.id} </a>)
           })}
 
+          <form onSubmit={this._onSubmit}>
+            <label>Your Name:</label>
+            <input id="name" onChange={this._onInputChange}/>
+            <button>New Game</button>
+          </form>
+
         </header>
       </div>
     );
@@ -45,6 +52,17 @@ class Home extends Component {
   onClick = (gameId) => {
     this.setState({ gameId })
   };
+
+  _onSubmit = (e) => {
+    e.preventDefault()
+    axios.post('games.json', { game: { player_name: this.state.playerName }}).then(response => {
+      this.setState({gameId: response.data.id })
+    })
+  }
+
+  _onInputChange = (e) => {
+    this.setState({ playerName: e.target.value})
+  }
 }
 
 export default Home;

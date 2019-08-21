@@ -11,6 +11,7 @@
 class Game < ApplicationRecord
   include AASM
   include SocketSendable
+  has_one :started_by, class_name: Player.name
   has_many :players
   has_many :game_prompts
   has_many :responses, through: :game_prompts
