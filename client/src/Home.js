@@ -27,6 +27,7 @@ class Home extends Component {
   }
 
   render() {
+    // should look for player id cookie, see if a game is in progress, autoload that game, etc.
     if (this.state.gameId) {
       return <Game id={this.state.gameId} setPlayerCookie={this._setPlayerCookie} />
     }

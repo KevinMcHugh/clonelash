@@ -6,7 +6,7 @@ class Api::AdminController < ApplicationController
     player = Player.create(game_id: params[:game_id], name: Faker::Name.name)
     # TODO add CreatePlayer interactor to dry this up
     GameChannel.broadcast_to(player.game, player.to_socket_json)
-
+    # Only do this if the game has actually changed state.
     GameChannel.broadcast_to(player.game, player.game.to_socket_json)
 
     render json: player
