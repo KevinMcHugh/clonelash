@@ -12,16 +12,18 @@
 class Game < ApplicationRecord
   include AASM
   include SocketSendable
+
   belongs_to :started_by, class_name: Player.name, optional: true
   has_many :players
   has_many :game_prompts
   has_many :responses, through: :game_prompts
 
+  scope :joinable, -> { where.not(state: ['created','canceled','finished']) }
+
   aasm column: :state do
     state :created, initial: true
     state :started
     state :voting_opened
-    state :voting_closed
     state :final_question_opened
     state :final_voting_opened
     state :finished
