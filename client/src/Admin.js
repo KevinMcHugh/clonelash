@@ -24,14 +24,17 @@ class Admin extends Component {
   }
 
   render() {
-
-    return (
-      <div>
-        <button onClick={this._addAPlayer}>Add a player.</button>
-        <button onClick={this._answerQuestions}>Answer all questions.</button>
-        <button onClick={this._completeVotes}>Complete all votes.</button>
-      </div>
-    )
+    if (this.props.player && this.props.player.admin) {
+      return (
+        <div>
+          <button onClick={this._addAPlayer}>Add a player.</button>
+          <button onClick={this._answerQuestions}>Answer all questions.</button>
+          <button onClick={this._completeVotes}>Complete all votes.</button>
+        </div>
+      )
+    } else {
+      return null
+    }
   }
 }
 

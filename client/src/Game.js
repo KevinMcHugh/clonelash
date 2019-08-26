@@ -79,7 +79,7 @@ class Game extends Component {
               <Players game_id={this.props.id} player={this.state.player} winners={this.state.game.winners} />
             </div>
             <footer className="App-footer">
-              <Admin game_id={this.props.id}/>
+              <Admin game_id={this.props.id} player={this.state.player}/>
             </footer>
           </div>
         </ActionCableProvider>
