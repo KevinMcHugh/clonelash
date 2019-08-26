@@ -53,7 +53,7 @@ class Game extends Component {
     axios.post('players',
       {game_id: this.props.id, name: name})
       .then(response => {
-        this.props.setPlayerCookie(response.data.id)
+        this.props.setCookies(response.data.id, this.props.id)
         this.setState({
           player: response.data,
         })
@@ -74,12 +74,12 @@ class Game extends Component {
               game state: {this.state.game.state}
             </header>
             <div className="App-body">
-              {this._renderStartOrWait()}
               <div className="App-player">{this._renderPlayer()}</div>
               <Players game_id={this.props.id} player={this.state.player} winners={this.state.game.winners} />
             </div>
             <footer className="App-footer">
               <Admin game_id={this.props.id} player={this.state.player}/>
+              <button onClick={this.props.unsetCookies}>Leave the game now!</button>
             </footer>
           </div>
         </ActionCableProvider>
@@ -93,27 +93,6 @@ class Game extends Component {
         </header>
       </div>
     )
-  }
-
-  _renderStartOrWait() {
-    if (this.state.game.state === "created") {
-      if (this.state.game.startable) {
-        return (<button onClick={(e) => this._startGame(e)}>Start the game now!</button>)
-      } else {
-        return (<div> Waiting for more players! </div>)
-      }
-    }
-  }
-
-  _startGame = (e) => {
-    e.preventDefault()
-    axios.put('games/' + this.props.id,
-      {game: { state: 'started'}})
-      .then(response => {
-        this.setState({
-          game: response.data,
-        })
-    }).catch(error => console.log(error))
   }
 
   _renderPlayer() {

@@ -31,7 +31,7 @@ class Home extends Component {
   render() {
     // should look for player id cookie, see if a game is in progress, autoload that game, etc.
     if (this.state.gameId) {
-      return <Game id={this.state.gameId} setPlayerCookie={this._setPlayerCookie} />
+      return <Game id={this.state.gameId} setCookies={this._setCookies} unsetCookies={() => this._unsetCookies()}/>
     }
     return (
       <div className="App">
@@ -73,6 +73,14 @@ class Home extends Component {
     const cookies = new Cookies();
     cookies.set('player_id', playerId, { path: '/' });
     cookies.set('game_id', gameId, { path: '/' });
+  }
+
+  _unsetCookies() {
+    const cookies = new Cookies();
+    cookies.remove('player_id')
+    cookies.remove('game_id')
+
+    this.setState({gameId: null})
   }
 }
 
