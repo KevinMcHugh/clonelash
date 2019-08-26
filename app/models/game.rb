@@ -62,8 +62,17 @@ class Game < ApplicationRecord
       created_at: created_at,
       updated_at: updated_at,
       startable: startable?,
-      started_by_id: started_by_id
+      started_by_id: started_by_id,
+      winners: winners.map(&:as_json)
     }
+  end
+
+  def winners
+    if finished?
+      by_score = players.group_by(&:score)
+      scores = by_score.keys.sort
+      by_score[scores.last]
+    end
   end
 
   def startable?

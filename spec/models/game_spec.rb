@@ -25,4 +25,13 @@ RSpec.describe Game do
       expect(subject).to be(false)
     end
   end
+
+  describe '#winner' do
+    context 'game is not finished' do
+
+    end
+    context 'game is finished' do
+
+    end
+  end
 end
