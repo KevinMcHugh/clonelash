@@ -37,6 +37,8 @@ class Players extends Component {
   render() {
     const channel = { channel: 'GameChannel', id: this.props.game_id }
     const playerId = (this.props.player || {}).id
+    const winnerIds = this.props.winners ? this.props.winners.map(winner => { return winner.id }) : []
+
     if (this.state.players) {
       return (
         <div className='Player-container'>
@@ -44,8 +46,15 @@ class Players extends Component {
             channel={channel}
             onReceived={this.handleReceivedPlayer} />
           {this.state.players.map (player => {
+            let className = "Player"
+            if (player.id === playerId) {
+              className += " Player-current"
+            }
+            if (winnerIds.includes(player.id)) {
+              className += " Player-winner"
+            }
             return (
-              <div key={player.id} className={player.id === playerId ? 'Player Player-current' : 'Player' }>
+              <div key={player.id} className={className}>
                 {player.name}
                 <div>Score: {player.score}</div>
               </div>

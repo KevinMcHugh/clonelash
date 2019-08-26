@@ -10,6 +10,11 @@
   border-color: white;
 }
 
+.Player-winner {
+  background-color: #ffc900;
+  border-style: hidden;
+}
+
 .Player-container {
   display: flex;
   height: 10%;

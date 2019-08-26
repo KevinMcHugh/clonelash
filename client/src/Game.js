@@ -76,7 +76,7 @@ class Game extends Component {
             <div className="App-body">
               {this._renderStartOrWait()}
               <div className="App-player">{this._renderPlayer()}</div>
-              <Players game_id={this.props.id} player={this.state.player} />
+              <Players game_id={this.props.id} player={this.state.player} winners={this.state.game.winners} />
             </div>
             <footer className="App-footer">
               <Admin game_id={this.props.id}/>
