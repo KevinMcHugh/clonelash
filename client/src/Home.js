@@ -8,9 +8,11 @@ class Home extends Component {
 
   constructor(props){
     super(props)
+    const cookies = new Cookies();
+
     this.state = {
       games: [],
-      gameId: null,
+      gameId: cookies.get('game_id'),
       playerName: null
     }
   }
@@ -58,7 +60,7 @@ class Home extends Component {
   _onSubmit = (e) => {
     e.preventDefault()
     axios.post('games.json', { game: { player_name: this.state.playerName }}).then(response => {
-      this._setPlayerCookie(response.data.started_by_id)
+      this._setCookies(response.data.started_by_id, response.data.id)
       this.setState({gameId: response.data.id })
     })
   }
@@ -67,9 +69,10 @@ class Home extends Component {
     this.setState({ playerName: e.target.value})
   }
 
-  _setPlayerCookie(playerId) {
+  _setCookies(playerId, gameId) {
     const cookies = new Cookies();
     cookies.set('player_id', playerId, { path: '/' });
+    cookies.set('game_id', gameId, { path: '/' });
   }
 }
 
