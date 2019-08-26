@@ -30,7 +30,7 @@ class Game < ApplicationRecord
     state :canceled
 
     event :start do
-      transitions from: :requested, to: :started
+      transitions from: :created, to: :started
     end
 
     event :open_voting do
@@ -40,10 +40,6 @@ class Game < ApplicationRecord
 
     event :open_final_question do
       transitions from: :voting_opened, to: :final_question_opened
-    end
-
-    event :open_final_voting do
-      transitions from: :final_question_opened, to: :final_voting_opened
     end
 
     event :finish do
