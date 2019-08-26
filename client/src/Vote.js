@@ -8,7 +8,7 @@ class Vote extends Component {
   constructor(props){
     super(props)
     this.state = {
-      responsesToVoteOn: null
+      responseToVoteOn: null
     }
   }
 
@@ -17,19 +17,16 @@ class Vote extends Component {
       { params: { player_id: this.props.playerId, foo: 'bar' }})
       .then(response => {
         this.setState({
-          responsesToVoteOn: response.data,
+          responseToVoteOn: response.data,
         })
     }).catch(error => console.log(error))
   }
 
   handleReceivedPlayerMessage = (response) => {
     if (response.message_type === 'Vote') {
-      let responsesToVoteOn = this.state.responsesToVoteOn;
-      if (!responsesToVoteOn.some(p => p.id === response.id)) {
-        responsesToVoteOn.push(response)
-      }
+      let responseToVoteOn = this.state.responseToVoteOn;
       this.setState({
-        responsesToVoteOn
+        responseToVoteOn
       })
     }
   }
@@ -40,7 +37,7 @@ class Vote extends Component {
 
     if (this.state.prompts === null) {
       return (<div>hang on...</div>)
-    } else if (_.isEmpty(this.state.responsesToVoteOn)) {
+    } else if (_.isEmpty(this.state.responseToVoteOn)) {
       return (<div>Wait for other players...</div>)
     } else {
       return (
@@ -60,16 +57,16 @@ class Vote extends Component {
       {response_id: responseId})
       .then(response => {
         // actually probably want to leave this up while votes roll in...
-        let responsesToVoteOn = this.state.responsesToVoteOn
-        _.remove(responsesToVoteOn, {id: response.data.id})
+        let responseToVoteOn = this.state.responseToVoteOn
+        _.remove(responseToVoteOn, {id: response.data.id})
         this.setState({
-          responsesToVoteOn
+          responseToVoteOn
         })
     }).catch(error => console.log(error))
   }
 
   _renderVote() {
-    const vote = _.first(this.state.responsesToVoteOn)
+    const vote = _.first(this.state.responseToVoteOn)
     if (vote) {
       return (
         <div>
@@ -83,7 +80,7 @@ class Vote extends Component {
   _renderResponses(vote) {
     return vote.responses.map((response) => {
       return (
-        <button key={response.id} onClick={(e) => this._onClick(e,vote.id,response.id)}>
+        <button key={response.id} onClick={(e) => this._onClick(e,vote.id,response.id)} disabled={!response.selectable} >
           {response.text}
         </button>
       )

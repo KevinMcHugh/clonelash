@@ -16,6 +16,8 @@ class Player < ApplicationRecord
   belongs_to :game
   has_many :responses
 
+  scope :responding, -> { where(admin: false) }
+
   def score
     Vote.where(response: responses).count
   end

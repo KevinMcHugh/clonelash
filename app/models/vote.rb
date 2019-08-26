@@ -17,6 +17,14 @@ class Vote < ApplicationRecord
   belongs_to :player, optional: true
 
   def as_json(options={})
+    unselectable_response_ids = []
+
+    if game_prompt.prompt.for_all_players
+      unselectable_response_ids = game_prompt.responses.where(player: options[:player]).pluck(:id)
+    elsif options[:player].admin || response || game_prompt.responses.find_by(player: options[:player])
+      unselectable_response_ids = game_prompt.responses.pluck(:id)
+    end
+
     {
       id: id,
       response_id: response&.id,
@@ -26,7 +34,8 @@ class Vote < ApplicationRecord
       responses: game_prompt.responses.map do |response|
         {
           id: response.id,
-          text: response.text
+          text: response.text,
+          selectable: unselectable_response_ids.include?(response.id)
         }
       end
     }

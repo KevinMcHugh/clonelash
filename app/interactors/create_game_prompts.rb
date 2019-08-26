@@ -3,10 +3,11 @@ class CreateGamePrompts
 
   def call
     game = context.game
-    unique_permutations = game.players.to_a.permutation(2).map(&:sort).uniq.shuffle
+    players = game.players.responding
+    unique_permutations = players.to_a.permutation(2).map(&:sort).uniq.shuffle
     pairs_by_player = {}
     pairs = []
-    game.players.each { |p| pairs_by_player[p] = [] }
+    players.each { |p| pairs_by_player[p] = [] }
     unique_permutations.each do |permutation|
       if pairs_by_player[permutation.first].count < 4 && pairs_by_player[permutation.last].count < 4
         pairs_by_player[permutation.first] << permutation

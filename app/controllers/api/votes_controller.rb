@@ -5,7 +5,7 @@ class Api::VotesController < ApplicationController
   def index
     votes = Vote.where(player_id: params[:player_id], response: nil)
 
-    render json: votes
+    render json: votes.map { |v| v.as_json(player: Player.find(params[:player_id]))}
   end
 
   def update
