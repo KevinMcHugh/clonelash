@@ -13,7 +13,12 @@ class UpdateVote
       # check all game_prompt's have received all votes.
       if game.all_votes_received?
         # TODO should mark this final prompt somehow
-        GamePrompt.create(prompt: Prompt.find_by(for_all_players: true), game: game)
+        final_prompt = GamePrompt.create(prompt: Prompt.find_by(for_all_players: true), game: game)
+        game.players.each do |player|
+          response = Response.create(player: player, game_prompt: final_prompt)
+          # wait actually this is gonna kind suck it's very slow.
+          PlayerChannel.broadcast_to(player, response.to_socket_json)
+        end
         game.open_final_question!
 
         GameChannel.broadcast_to(game, game.to_socket_json)
