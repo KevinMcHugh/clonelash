@@ -72,6 +72,8 @@ class Game < ApplicationRecord
       by_score = players.group_by(&:score)
       scores = by_score.keys.sort
       by_score[scores.last]
+    else
+      []
     end
   end
 

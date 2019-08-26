@@ -26,9 +26,10 @@ class Api::AdminController < ApplicationController
     # TODO make this bit work with a nice join-based query
     game.game_prompts.find_each do |game_prompt|
       game_prompt.votes.where(response: nil).each do |vote|
-        UpdateVote.call(vote: vote, response_id: vote.game_prompt.responses.first.id)
+        UpdateVote.call!(vote: vote, response_id: vote.game_prompt.responses.first.id)
       end
     end
+    AdvanceGameState.call!(game: game)
 
     render json: game.as_json
   end
