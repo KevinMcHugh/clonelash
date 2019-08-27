@@ -2,11 +2,12 @@
 #
 # Table name: games
 #
-#  id            :uuid             not null, primary key
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  state         :string
-#  started_by_id :uuid
+#  id                     :uuid             not null, primary key
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  state                  :string
+#  started_by_id          :uuid
+#  current_game_prompt_id :uuid
 #
 
 class Game < ApplicationRecord
@@ -14,6 +15,7 @@ class Game < ApplicationRecord
   include SocketSendable
 
   belongs_to :started_by, class_name: Player.name, optional: true
+  belongs_to :current_game_prompt, class_name: GamePrompt.name, optional: true
   has_many :players
   has_many :game_prompts
   has_many :responses, through: :game_prompts

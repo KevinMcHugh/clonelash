@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_15_160535) do
+ActiveRecord::Schema.define(version: 2019_08_27_204058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2019_08_15_160535) do
     t.datetime "updated_at", null: false
     t.string "state"
     t.uuid "started_by_id"
+    t.uuid "current_game_prompt_id"
+    t.index ["current_game_prompt_id"], name: "index_games_on_current_game_prompt_id"
     t.index ["started_by_id"], name: "index_games_on_started_by_id"
   end
 
