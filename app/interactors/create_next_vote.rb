@@ -3,13 +3,17 @@ class CreateNextVote
 
   def call
     game = context.game
-    game_prompt = game.game_prompts.order(:created_at).reject(&:all_votes_received?).first
+    if game.current_game_prompt
+      prompts = game.game_prompts.order(:created_at)
+      current_game_prompt_index = prompts.find_index(game.current_game_prompt)
+      game_prompt = prompts[current_game_prompt_index + 1]
+    else
+      game_prompt = game.game_prompts.order(:created_at).reject(&:all_votes_received?).first
+    end
+    game.update_attributes(current_game_prompt: game_prompt)
 
-    # TODO: show all players the question and options. Don't allow admin or submitters to vote.
-    # For the final question, send non-submitted responses.
     game.players.each do |player|
-      vote = Vote.find_or_create_by(player: player, game_prompt: game_prompt, response: nil)
-      PlayerChannel.broadcast_to(player, vote.to_socket_json(player: player))
+      PlayerChannel.broadcast_to(player, game_prompt.to_socket_json(player: player))
     end
     GameChannel.broadcast_to(game, game.to_socket_json)
   end

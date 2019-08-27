@@ -21,4 +21,9 @@ class Api::PlayersController < ApplicationController
 
     render json: player.responses.where(text: nil)
   end
+
+  def current_game_prompt
+    player = Player.find(params[:player_id])
+    render json: player.game.current_game_prompt.as_json(player: player)
+  end
 end

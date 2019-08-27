@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     end
     resources :players do
       get :prompts
+      get :current_game_prompt
     end
 
     resources :responses

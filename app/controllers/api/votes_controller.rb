@@ -8,15 +8,14 @@ class Api::VotesController < ApplicationController
     render json: votes.map { |v| v.as_json(player: Player.find(params[:player_id]))}
   end
 
-  def update
-    vote = Vote.find(params[:id])
-    UpdateVote.call(vote: vote, response_id: update_params[:response_id])
+  def create
+    vote = CreateVote.call(create_params).vote
     render json: vote
   end
 
   private
 
-  def update_params
-    params.require(:vote).permit(:response_id)
+  def create_params
+    params.require(:vote).permit(:response_id, :player_id, :game_prompt_id)
   end
 end

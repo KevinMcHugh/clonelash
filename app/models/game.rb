@@ -61,7 +61,8 @@ class Game < ApplicationRecord
       updated_at: updated_at,
       startable: startable?,
       started_by_id: started_by_id,
-      winners: winners.map(&:as_json)
+      winners: winners.map(&:as_json),
+      current_game_prompt_id: current_game_prompt_id
     }
   end
 
@@ -81,9 +82,5 @@ class Game < ApplicationRecord
 
   def all_responses_received?
     responses.any? && responses.count == responses.where.not(text: nil).count
-  end
-
-  def all_votes_received?
-    game_prompts.any? && game_prompts.all?(&:all_votes_received?)
   end
 end

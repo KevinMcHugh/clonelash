@@ -47,6 +47,7 @@ class Admin extends Component {
   }
 
   render() {
+    // All this shit seems to break sockets...
     if (this.props.player && this.props.player.admin) {
       return (
         <div>

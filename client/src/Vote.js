@@ -8,26 +8,23 @@ class Vote extends Component {
   constructor(props){
     super(props)
     this.state = {
-      responseToVoteOn: null
+      gamePrompt: null
     }
   }
 
   componentDidMount() {
-    axios.get('votes',
-      { params: { player_id: this.props.playerId, foo: 'bar' }})
+    axios.get('players/' + this.props.playerId + '/current_game_prompt')
       .then(response => {
         this.setState({
-          responseToVoteOn: response.data,
+          gamePrompt: response.data,
         })
     }).catch(error => console.log(error))
   }
 
   handleReceivedPlayerMessage = (response) => {
-    if (response.message_type === 'Vote') {
-      let responseToVoteOn = this.state.responseToVoteOn;
-      this.setState({
-        responseToVoteOn
-      })
+    if (response.message_type === 'GamePrompt') {
+      let gamePrompt = this.state.gamePrompt;
+      this.setState({gamePrompt})
     }
   }
 
@@ -37,7 +34,7 @@ class Vote extends Component {
 
     if (this.state.prompts === null) {
       return (<div>hang on...</div>)
-    } else if (_.isEmpty(this.state.responseToVoteOn)) {
+    } else if (_.isEmpty(this.state.gamePrompt)) {
       return (<div>Wait for other players...</div>)
     } else {
       return (
@@ -51,27 +48,20 @@ class Vote extends Component {
     }
   }
 
-  _onClick = (e,voteId,responseId) => {
-    // e.preventDefault()
-    axios.put('votes/' + voteId,
-      {response_id: responseId})
+  _onClick = (e,responseId) => {
+    axios.post('votes',
+      {response_id: responseId, player_id: this.props.playerId, game_prompt_id: this.state.gamePrompt.id})
       .then(response => {
-        // actually probably want to leave this up while votes roll in...
-        let responseToVoteOn = this.state.responseToVoteOn
-        _.remove(responseToVoteOn, {id: response.data.id})
-        this.setState({
-          responseToVoteOn
-        })
     }).catch(error => console.log(error))
   }
 
   _renderVote() {
-    const vote = _.first(this.state.responseToVoteOn)
-    if (vote) {
+    const gamePrompt = this.state.gamePrompt
+    if (gamePrompt) {
       return (
         <div>
-          vote now: {vote.game_prompt.text}
-          <div>{ this._renderResponses(vote) }</div>
+          vote now: {gamePrompt.text}
+          <div>{ this._renderResponses(gamePrompt) }</div>
         </div>
       )
     }
@@ -80,7 +70,7 @@ class Vote extends Component {
   _renderResponses(vote) {
     return vote.responses.map((response) => {
       return (
-        <button key={response.id} onClick={(e) => this._onClick(e,vote.id,response.id)} disabled={!response.selectable} >
+        <button key={response.id} onClick={(e) => this._onClick(e,response.id)} disabled={!response.selectable} >
           {response.text}
         </button>
       )
