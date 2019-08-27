@@ -10,12 +10,12 @@ class Api::GamesController < ApplicationController
   end
 
   def players
-    render json: Game.find(params[:game_id]).players
+    render json: Game.find(params[:game_id]).players.responding
   end
 
   def create
     game = Game.create
-    player = Player.create(game: game, name: create_params[:player_name], admin: true)
+    player = Player.create(game: game, admin: true)
     game.update_attributes(started_by: player)
     # No one could be subscribed to this, right?
     # GameChannel.broadcast_to(game, game.to_socket_json)

@@ -12,8 +12,7 @@ class Home extends Component {
 
     this.state = {
       games: [],
-      gameId: cookies.get('game_id'),
-      playerName: null
+      gameId: cookies.get('game_id')
     }
   }
 
@@ -43,8 +42,6 @@ class Home extends Component {
           })}
 
           <form onSubmit={this._onSubmit}>
-            <label>Your Name:</label>
-            <input id="name" onChange={this._onInputChange}/>
             <button>New Game</button>
           </form>
 
@@ -59,14 +56,10 @@ class Home extends Component {
 
   _onSubmit = (e) => {
     e.preventDefault()
-    axios.post('games.json', { game: { player_name: this.state.playerName }}).then(response => {
+    axios.post('games.json').then(response => {
       this._setCookies(response.data.started_by_id, response.data.id)
       this.setState({gameId: response.data.id })
     })
-  }
-
-  _onInputChange = (e) => {
-    this.setState({ playerName: e.target.value})
   }
 
   _setCookies(playerId, gameId) {

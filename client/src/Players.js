@@ -24,7 +24,7 @@ class Players extends Component {
   handleReceivedPlayer = (response) => {
     if (response.message_type === 'Player') {
       let players = this.state.players;
-      if (!players.some(p => p.id === response.id)) {
+      if (!players.some(p => p.id === response.id) && !players.admin) {
         players.push(response)
       }
       console.log(response)
