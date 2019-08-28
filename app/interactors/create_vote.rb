@@ -9,7 +9,7 @@ class CreateVote
                          response_id: context.response_id,
                          game_prompt: game_prompt)
 
-      GameChannel.broadcast_to(game_prompt.game, vote.response.player)
+      GameChannel.broadcast_to(game_prompt.game, vote.response.player.to_socket_json)
     end
 
     if game_prompt.all_votes_received?
