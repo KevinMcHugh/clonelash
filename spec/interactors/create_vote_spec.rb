@@ -1,7 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe UpdateVote do
+RSpec.describe CreateVote do
   describe '#call' do
+    before { pending }
     let(:game) { Game.create(state: :voting_opened) }
     let(:game_prompt) { GamePrompt.create(game: game, prompt: Prompt.create) }
     let(:vote) { Vote.create(game_prompt: game_prompt, player: Player.create(game: game)) }
