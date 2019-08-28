@@ -16,6 +16,7 @@ class AdvanceGameState
         # wait actually this is gonna kind suck it's very slow.
         PlayerChannel.broadcast_to(player, response.to_socket_json)
       end
+      game.update_attributes(current_game_prompt: final_prompt)
       game.open_final_question!
     elsif game.final_voting_opened?
       game.finish!
