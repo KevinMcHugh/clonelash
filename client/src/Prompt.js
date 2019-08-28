@@ -74,11 +74,19 @@ class Prompt extends Component {
       return (
         <div>
           Answer this question: {message.game_prompt.text}
-          <form onSubmit={(e) => this._onSubmit(e,message.id)}>
-            <input name="text"/>
-            <button>OK</button>
-          </form>
+          {this._renderForm(message)}
         </div>
+      )
+    }
+  }
+
+  _renderForm(message) {
+    if (message.id) {
+      return (
+        <form onSubmit={(e) => this._onSubmit(e,message.id)}>
+          <input name="text"/>
+          <button>OK</button>
+        </form>
       )
     }
   }

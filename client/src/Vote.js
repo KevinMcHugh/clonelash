@@ -35,7 +35,7 @@ class Vote extends Component {
     const playerId = this.props.playerId
     const channel = { channel: 'PlayerChannel', id: playerId }
 
-    if (this.state.prompts === null) {
+    if (this.state.gamePrompt === null) {
       return (<div>hang on...</div>)
     } else if (_.isEmpty(this.state.gamePrompt)) {
       return (<div>Wait for other players...</div>)

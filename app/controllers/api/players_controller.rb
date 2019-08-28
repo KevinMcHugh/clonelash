@@ -18,7 +18,7 @@ class Api::PlayersController < ApplicationController
 
   def prompts
     player = Player.find(params[:player_id])
-    if player.admin && player.game.current_game_prompt.final_question
+    if player.admin && player.game.current_game_prompt&.final_question
       response = Response.new(game_prompt: player.game.current_game_prompt, player: player)
       render json: [response]
     else

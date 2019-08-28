@@ -18,7 +18,9 @@ class CreateNextVote
         PlayerChannel.broadcast_to(player, game_prompt.to_socket_json(player: player))
       end
     else
-      AdvanceGameState.call(game: game)
+      if game.current_game_prompt.all_votes_received?
+        AdvanceGameState.call(game: game)
+      end
     end
     GameChannel.broadcast_to(game, game.to_socket_json)
   end

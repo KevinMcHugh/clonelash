@@ -8,7 +8,7 @@ RSpec.describe UpdateResponse do
     let(:player_2) { Player.create(game: game) }
     let!(:player_3) { Player.create(game: game) }
 
-    let(:game_prompt) { GamePrompt.create(game: game, prompt: prompt) }
+    let(:game_prompt) { GamePrompt.create(game: game, prompt: prompt, state: :accepting_answers) }
     let!(:response_one) { Response.create(game_prompt: game_prompt, player: player_1) }
     let!(:response_two) { Response.create(game_prompt: game_prompt, player: player_2) }
     subject { described_class.call(response: response_one, text: 'foo') }
