@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import './Players.css';
+import _ from 'lodash';
 
 class Players extends Component {
 
@@ -24,10 +25,13 @@ class Players extends Component {
   handleReceivedPlayer = (response) => {
     if (response.message_type === 'Player') {
       let players = this.state.players;
-      if (!players.some(p => p.id === response.id) && !players.admin) {
+      const playerIndex = _.findIndex(players, {id: response.id})
+      if (playerIndex >=0) {
+        players[playerIndex] = response
+      } else {
         players.push(response)
       }
-      console.log(response)
+
       this.setState({
         players
       });
@@ -56,7 +60,10 @@ class Players extends Component {
             return (
               <div key={player.id} className={className}>
                 {player.name}
-                <div>Score: {player.score}</div>
+                <div>
+                  Score:
+                  {player.score}
+                </div>
               </div>
             )
           })}

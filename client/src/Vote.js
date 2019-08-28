@@ -27,8 +27,7 @@ class Vote extends Component {
 
   handleReceivedPlayerMessage = (response) => {
     if (response.message_type === 'GamePrompt') {
-      let gamePrompt = this.state.gamePrompt;
-      this.setState({gamePrompt})
+      this.setState({gamePrompt: response})
     }
   }
 
