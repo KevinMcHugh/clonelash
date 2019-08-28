@@ -38,10 +38,6 @@ RSpec.describe UpdateResponse do
           subject
         end
 
-        it 'creates Votes for appropriate players' do
-          expect{subject}.to change{Vote.count}.by(1)
-        end
-
         it 'updates the game state' do
           subject
           expect(game.reload.state).to eq('voting_opened')
@@ -60,10 +56,6 @@ RSpec.describe UpdateResponse do
         it 'makes a broadcast' do
           expect(GameChannel).to receive(:broadcast_to)
           subject
-        end
-
-        it 'creates Votes for appropriate players' do
-          expect{subject}.to change{Vote.count}.by(1)
         end
 
         it 'updates the game state' do

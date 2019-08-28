@@ -26,7 +26,6 @@ class Api::AdminController < ApplicationController
     game = Game.find(params[:game_id])
 
     CreateNextVote.call(game: game)
-    AdvanceGameState.call!(game: game)
 
     render json: game.as_json
   end

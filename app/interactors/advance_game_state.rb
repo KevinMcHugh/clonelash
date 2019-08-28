@@ -5,7 +5,11 @@ class AdvanceGameState
     game = context.game
 
     if game.voting_opened?
-      final_prompt = GamePrompt.create(prompt: Prompt.find_by(for_all_players: true), game: game, final_question: true)
+      final_prompt = GamePrompt.create(prompt: Prompt.find_by(for_all_players: true),
+                                       game: game,
+                                       final_question: true,
+                                       state: :accepting_answers)
+
       game.players.responding.each do |player|
         response = Response.create(player: player, game_prompt: final_prompt)
 
