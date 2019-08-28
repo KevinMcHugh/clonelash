@@ -12,13 +12,17 @@ class Vote extends Component {
     }
   }
 
-  componentDidMount() {
+  _getCurrentGamePrompt = () => {
     axios.get('players/' + this.props.playerId + '/current_game_prompt')
       .then(response => {
         this.setState({
           gamePrompt: response.data,
         })
     }).catch(error => console.log(error))
+  }
+
+  componentDidMount() {
+    this._getCurrentGamePrompt()
   }
 
   handleReceivedPlayerMessage = (response) => {
@@ -52,6 +56,7 @@ class Vote extends Component {
     axios.post('votes',
       {response_id: responseId, player_id: this.props.playerId, game_prompt_id: this.state.gamePrompt.id})
       .then(response => {
+        this._getCurrentGamePrompt()
     }).catch(error => console.log(error))
   }
 
@@ -60,7 +65,8 @@ class Vote extends Component {
     if (gamePrompt) {
       return (
         <div>
-          vote now: {gamePrompt.text}
+          vote now:
+          {gamePrompt.text}
           <div>{ this._renderResponses(gamePrompt) }</div>
         </div>
       )
