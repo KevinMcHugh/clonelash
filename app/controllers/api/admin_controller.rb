@@ -25,6 +25,11 @@ class Api::AdminController < ApplicationController
   def complete_votes
     game = Game.find(params[:game_id])
 
+    game_prompt = game.current_game_prompt
+    until game_prompt.all_votes_received?
+      CreateVote.call(game_prompt_id: game_prompt.id, response_id: game_prompt.responses.sample.id)
+    end
+
     CreateNextVote.call(game: game)
 
     render json: game.as_json
