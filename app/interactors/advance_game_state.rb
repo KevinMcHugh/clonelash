@@ -5,9 +5,8 @@ class AdvanceGameState
     game = context.game
 
     if game.voting_opened?
-    # TODO should mark this final prompt somehow
-      final_prompt = GamePrompt.create(prompt: Prompt.find_by(for_all_players: true), game: game)
-      game.players.each do |player|
+      final_prompt = GamePrompt.create(prompt: Prompt.find_by(for_all_players: true), game: game, final_question: true)
+      game.players.responding.each do |player|
         response = Response.create(player: player, game_prompt: final_prompt)
 
         # wait actually this is gonna kind suck it's very slow.

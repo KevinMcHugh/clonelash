@@ -21,7 +21,7 @@ class CreateGamePrompts
     prompts = Prompt.order(Arel.sql("RANDOM()")).first(pairs.count)
 
     pairs.each_with_index do |permutation, index|
-      game_prompt = GamePrompt.create(prompt: prompts[index], game: game)
+      game_prompt = GamePrompt.create(prompt: prompts[index], game: game, state: :accepting_answers)
       permutation.each do |player|
         response = Response.create(player: player, game_prompt: game_prompt)
         # wait actually this is gonna kind suck it's very slow.

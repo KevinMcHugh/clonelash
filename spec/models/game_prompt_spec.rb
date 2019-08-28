@@ -2,11 +2,13 @@
 #
 # Table name: game_prompts
 #
-#  id         :uuid             not null, primary key
-#  game_id    :uuid             not null
-#  prompt_id  :uuid             not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id             :uuid             not null, primary key
+#  game_id        :uuid             not null
+#  prompt_id      :uuid             not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  state          :string
+#  final_question :boolean          default(TRUE)
 #
 
 require 'rails_helper' 
