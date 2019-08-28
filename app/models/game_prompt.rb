@@ -35,14 +35,13 @@ class GamePrompt < ApplicationRecord
   end
 
   def all_votes_received?
-    binding.pry
     if final_question
       votes_needed = game.players.responding.count
     else
       votes_needed = game.players.responding.count - responses.count
     end
 
-    votes_needed >= votes.count
+    votes.count >= votes_needed
   end
 
   def as_json(options={})
