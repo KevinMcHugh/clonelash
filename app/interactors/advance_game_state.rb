@@ -21,6 +21,7 @@ class AdvanceGameState
       game.finish!
     end
 
+    # TODO do something with the game finishing in the clients....
     GameChannel.broadcast_to(game, game.to_socket_json)
   end
 end
