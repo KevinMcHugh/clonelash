@@ -8,7 +8,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  state          :string
-#  final_question :boolean          default(TRUE)
+#  final_question :boolean          default(FALSE), not null
 #
 
 class GamePrompt < ApplicationRecord
@@ -35,7 +35,14 @@ class GamePrompt < ApplicationRecord
   end
 
   def all_votes_received?
-    votes.any? && votes.all?(&:response)
+    binding.pry
+    if final_question
+      votes_needed = game.players.responding.count
+    else
+      votes_needed = game.players.responding.count - responses.count
+    end
+
+    votes_needed >= votes.count
   end
 
   def as_json(options={})

@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_153659) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "state"
-    t.boolean "final_question", default: true
+    t.boolean "final_question", default: false, null: false
     t.index ["game_id"], name: "index_game_prompts_on_game_id"
     t.index ["prompt_id"], name: "index_game_prompts_on_prompt_id"
   end
