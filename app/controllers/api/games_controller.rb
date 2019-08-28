@@ -2,7 +2,7 @@ class Api::GamesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: Game.joinable.map(&:as_json)
+    render json: [Game.order(:created_at).last].compact.map(&:as_json)
   end
 
   def show
