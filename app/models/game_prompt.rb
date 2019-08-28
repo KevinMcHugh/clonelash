@@ -24,6 +24,7 @@ class GamePrompt < ApplicationRecord
     state :created, initial: true
     state :accepting_answers
     state :accepting_votes
+    state :finished
 
     event :accept_answers do
       transitions from: :created, to: :accepting_answers
@@ -31,6 +32,10 @@ class GamePrompt < ApplicationRecord
 
     event :accept_votes do
       transitions from: :accepting_answers, to: :accepting_votes
+    end
+
+    event :finish do
+      transitions from: :accepting_votes, to: :finished
     end
   end
 
@@ -54,7 +59,7 @@ class GamePrompt < ApplicationRecord
       elsif options[:player]&.admin || responses.find_by(player: options[:player]) || votes.find_by(player: options[:player])
         unselectable_response_ids = responses.pluck(:id)
       end
-    elsif accepting_answers?
+    else
       unselectable_response_ids = responses.pluck(:id)
     end
 
