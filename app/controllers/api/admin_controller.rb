@@ -30,8 +30,6 @@ class Api::AdminController < ApplicationController
       CreateVote.call(game_prompt_id: game_prompt.id, response_id: game_prompt.responses.sample.id)
     end
 
-    CreateNextVote.call(game: game)
-
     render json: game.as_json
   end
 end

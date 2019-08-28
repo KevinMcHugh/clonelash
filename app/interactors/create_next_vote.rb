@@ -12,13 +12,13 @@ class CreateNextVote
     end
     if game_prompt
       game.update_attributes(current_game_prompt: game_prompt)
+      game_prompt.accept_votes!
 
       game.players.each do |player|
         PlayerChannel.broadcast_to(player, game_prompt.to_socket_json(player: player))
       end
     else
       AdvanceGameState.call(game: game)
-
     end
     GameChannel.broadcast_to(game, game.to_socket_json)
   end
