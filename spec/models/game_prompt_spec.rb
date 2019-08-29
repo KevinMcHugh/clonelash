@@ -45,4 +45,8 @@ RSpec.describe GamePrompt do
       end
     end
   end
+
+  describe '#as_json' do
+
+  end
 end
