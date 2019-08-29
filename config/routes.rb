@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   namespace :api do
     resources :games do
       get :players
+      collection do
+        get :current
+      end
     end
     resources :players do
       get :prompts

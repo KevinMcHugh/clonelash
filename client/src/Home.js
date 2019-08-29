@@ -18,13 +18,6 @@ class Home extends Component {
 
   componentWillMount() {
     axios.defaults.baseURL = "/api"
-
-    axios.get('games.json')
-      .then(response => {
-        this.setState({
-          games: response.data
-        })
-    }).catch(error => console.log(error))
   }
 
   render() {
@@ -35,9 +28,7 @@ class Home extends Component {
       <div className="App">
         <header className="App-header" />
         <div className="game-links">
-          {this.state.games.map (game => {
-            return (<a key={game.id} onClick={() => this.onClickGame(game.id)}> Join the existing Game </a>)
-          })}
+          <a onClick={this.onClickGame}> Join the existing Game </a>
         </div>
         {this._renderNewGameButton()}
       </div>
@@ -52,8 +43,11 @@ class Home extends Component {
     )
   }
 
-  onClickGame = (gameId) => {
-    this.setState({ gameId })
+  onClickGame = () => {
+    axios.get('games/current.json')
+      .then(response => {
+        this.setState({ gameId: response.data.id })
+    }).catch(error => console.log(error))
   };
 
   _onClickNewGame = (e) => {
