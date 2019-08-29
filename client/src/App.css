@@ -36,6 +36,19 @@
 .App-body {
   height: 80%;
 }
+
+.game-links {
+  height: 40%;
+}
+
+.new-game {
+  padding: 40%;
+  color: gray;
+}
+
+a {
+  text-decoration: underline;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

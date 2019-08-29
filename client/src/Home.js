@@ -28,33 +28,35 @@ class Home extends Component {
   }
 
   render() {
-    // should look for player id cookie, see if a game is in progress, autoload that game, etc.
     if (this.state.gameId) {
       return <Game id={this.state.gameId} setCookies={this._setCookies} unsetCookies={() => this._unsetCookies()}/>
     }
     return (
       <div className="App">
-        <header className="App-header">
-          This is not Quiplash
-
+        <header className="App-header" />
+        <div className="game-links">
           {this.state.games.map (game => {
-            return (<a key={game.id} onClick={() => this.onClick(game.id)}> {game.id} </a>)
+            return (<a key={game.id} onClick={() => this.onClickGame(game.id)}> Join the existing Game </a>)
           })}
-
-          <form onSubmit={this._onSubmit}>
-            <button>New Game</button>
-          </form>
-
-        </header>
+        </div>
+        {this._renderNewGameButton()}
       </div>
     );
   }
 
-  onClick = (gameId) => {
+  _renderNewGameButton = () => {
+    return (
+      <div className="new-game">
+        <a onClick={this._onClickNewGame}>Start Your Own Game</a>
+      </div>
+    )
+  }
+
+  onClickGame = (gameId) => {
     this.setState({ gameId })
   };
 
-  _onSubmit = (e) => {
+  _onClickNewGame = (e) => {
     e.preventDefault()
     axios.post('games.json').then(response => {
       this._setCookies(response.data.started_by_id, response.data.id)
