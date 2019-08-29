@@ -11,7 +11,7 @@ class PlayerMessages extends Component {
       return (<Prompt playerId={playerId}/>)
     } else if (this.props.game.state === 'voting_opened' || this.props.game.state === 'final_voting_opened') {
       return (<Vote playerId={playerId} game={this.props.game}/>)
-    } else if (this.props.game.state == 'finished') {
+    } else if (this.props.game.state === 'finished') {
       return "Congrats to the winner, " + winnerNames
     } else {
       return "Game will start soon...Maybe a join code goes here."
