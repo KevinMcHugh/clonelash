@@ -4,6 +4,7 @@
   font-size: 18px;
   min-width: 66px;
   border-color: darkgray;
+  height: 65px;
 }
 
 .Player-current {
@@ -29,14 +30,16 @@
 
 @keyframes score-transition {
   0%   {
-    transform: translateY(0);
-    transform: rotate(25deg);
+    transform: scale(1,1) translateY(0) rotate(25deg);
     border-color: yellow;
   }
-  50%  { transform: translateY(-50px); }
+  10%  { transform: scale(1.1,.9)   translateY(0) rotate(25deg); }
+  30%  { transform: scale(.9,1.1)   translateY(-50px)  rotate(25deg); }
+  50%  { transform: scale(1.05,.95) translateY(0) rotate(25deg); }
+  57%  { transform: scale(1,1)      translateY(-10px)  rotate(25deg); }
+  64%  { transform: scale(1,1)      translateY(0)  rotate(25deg); }
   100% {
-    transform: translateY(0);
-    transform: rotate(25deg);
+    transform: translateY(0) scale(1,1)  rotate(25deg);
     border-color: darkgray;
   }
 }
