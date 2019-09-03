@@ -25,8 +25,8 @@ class Response < ApplicationRecord
         text: game_prompt.prompt.text
       },
       player: {
-        id: player.id,
-        name: player.name
+        id: player&.id,
+        name: player&.name
       }
     }
   end
