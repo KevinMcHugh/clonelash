@@ -27,6 +27,10 @@ class Players extends Component {
       let players = this.state.players;
       const playerIndex = _.findIndex(players, {id: response.id})
       if (playerIndex >=0) {
+        let oldPlayer = players[playerIndex]
+        if (oldPlayer.score != response.score) {
+          _.merge(response, {'scoreUpdated': true})
+        }
         players[playerIndex] = response
       } else {
         players.push(response)
@@ -57,12 +61,15 @@ class Players extends Component {
             if (winnerIds.includes(player.id)) {
               className += " Player-winner"
             }
+            if (player.scoreUpdated) {
+              className += " Player-score-updated"
+            }
             return (
               <div key={player.id} className={className}>
                 {player.name}
                 <div>
                   Score:
-                  {player.score}
+                  <div className="Player-score">{player.score}</div>
                 </div>
               </div>
             )

@@ -20,3 +20,13 @@
   height: 10%;
   justify-content: center;
 }
+
+.Player-score-updated {
+  animation-name: score-transition;
+  animation-duration: 3s;
+}
+
+@keyframes score-transition {
+  from {border-color: yellow;}
+  to {border-color: darkgray;}
+}
