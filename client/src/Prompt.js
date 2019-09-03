@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import _ from 'lodash';
+import './Prompt.css';
 
 class Prompt extends Component {
 
@@ -44,7 +45,7 @@ class Prompt extends Component {
     }
     if (!_.isEmpty(this.state.prompts)) {
       return (
-        <div>
+        <div className="Prompt" autocomplete="off">
           <ActionCableConsumer
             channel={channel}
             onReceived={this.handleReceivedPlayerMessage} />
@@ -73,7 +74,8 @@ class Prompt extends Component {
     if (message) {
       return (
         <div>
-          Answer this question: {message.game_prompt.text}
+          <div> Answer this question: </div>
+          {message.game_prompt.text}
           {this._renderForm(message)}
         </div>
       )

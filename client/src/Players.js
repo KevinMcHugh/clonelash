@@ -29,6 +29,7 @@ class Players extends Component {
       if (playerIndex >=0) {
         let oldPlayer = players[playerIndex]
         if (oldPlayer.score != response.score) {
+          console.log(response.name + " score updated")
           _.merge(response, {'scoreUpdated': true})
         }
         players[playerIndex] = response

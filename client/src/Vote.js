@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { ActionCableConsumer } from 'react-actioncable-provider';
 import _ from 'lodash';
+import './Vote.css';
 
 class Vote extends Component {
 
@@ -41,7 +42,7 @@ class Vote extends Component {
       return (<div>Wait for other players...</div>)
     } else {
       return (
-        <div>
+        <div className="Vote">
           <ActionCableConsumer
             channel={channel}
             onReceived={this.handleReceivedPlayerMessage} />
@@ -64,7 +65,7 @@ class Vote extends Component {
     if (gamePrompt) {
       return (
         <div>
-          vote now:
+          <div>vote now:</div>
           {gamePrompt.text}
           <div>{ this._renderResponses(gamePrompt) }</div>
         </div>
