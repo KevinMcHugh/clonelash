@@ -19,6 +19,7 @@ class Game extends Component {
   }
 
   componentDidMount() {
+    document.title = "Generic websocket-based game"
     axios.defaults.baseURL = "/api"
 
     axios.get('games/' + this.props.id)
