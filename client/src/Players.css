@@ -1,6 +1,6 @@
 .Player {
   border-style: dashed;
-  transform: rotate(30deg);
+  transform: rotate(25deg);
   font-size: 18px;
   min-width: 66px;
   border-color: darkgray;
@@ -24,9 +24,19 @@
 .Player-score-updated {
   animation-name: score-transition;
   animation-duration: 3s;
+  animation-timing-function: ease;
 }
 
 @keyframes score-transition {
-  from {border-color: yellow;}
-  to {border-color: darkgray;}
+  0%   {
+    transform: translateY(0);
+    transform: rotate(25deg);
+    border-color: yellow;
+  }
+  50%  { transform: translateY(-50px); }
+  100% {
+    transform: translateY(0);
+    transform: rotate(25deg);
+    border-color: darkgray;
+  }
 }
