@@ -17,6 +17,7 @@ class Home extends Component {
   }
 
   componentWillMount() {
+    document.title = "Generic websocket-based game"
     axios.defaults.baseURL = "/api"
   }
 
