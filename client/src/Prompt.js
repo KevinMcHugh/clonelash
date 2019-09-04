@@ -45,7 +45,7 @@ class Prompt extends Component {
     }
     if (!_.isEmpty(this.state.prompts)) {
       return (
-        <div className="Prompt" autocomplete="off">
+        <div className="Prompt" autoComplete="off">
           <ActionCableConsumer
             channel={channel}
             onReceived={this.handleReceivedPlayerMessage} />

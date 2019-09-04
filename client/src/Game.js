@@ -102,7 +102,7 @@ class Game extends Component {
         return <div> Sorry, you are too late to join the game, but have fun voting!</div>
       } else {
         return (
-          <form onSubmit={this._onSubmit} autocomplete="off">
+          <form onSubmit={this._onSubmit} autoComplete="off">
             <input name="name" placeholder="player name"/>
             <button>OK</button>
           </form>
