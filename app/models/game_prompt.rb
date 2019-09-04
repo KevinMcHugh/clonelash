@@ -53,9 +53,15 @@ class GamePrompt < ApplicationRecord
     unselectable_response_ids = []
     options ||= {}
 
-    if final_question? && !votes.find_by(player: options[:player]) && !options[:player]&.admin
+    if final_question?
       unselectable_response_ids = responses.where(player: options[:player]).pluck(:id)
-    elsif options[:player]&.admin || !accepting_votes? || responses.find_by(player: options[:player])
+    end
+
+    if !options[:player] ||
+        options[:player]&.admin ||
+        !accepting_votes? ||
+        votes.find_by(player: options[:player]) ||
+        (!final_question? && responses.find_by(player: options[:player]))
       unselectable_response_ids = responses.pluck(:id)
     end
 
