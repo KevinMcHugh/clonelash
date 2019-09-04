@@ -7,7 +7,7 @@ class AdvanceGameState
     if game.voting_opened?
       used_game_prompt_ids = game.game_prompts.pluck(:id)
 
-      final_prompt = GamePrompt.create(prompt: Prompt.where.not(id: used_game_prompt_ids).first,
+      final_prompt = GamePrompt.create(prompt: Prompt.where.not(id: used_game_prompt_ids).sample,
                                        game: game,
                                        final_question: true,
                                        state: :accepting_answers)
