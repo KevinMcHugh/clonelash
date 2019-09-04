@@ -29,6 +29,7 @@ class Players extends Component {
       if (playerIndex >=0) {
         let oldPlayer = players[playerIndex]
         if (oldPlayer.score != response.score) {
+          console.log(response.name + " score updated")
           response.scoreUpdated = oldPlayer.scoreUpdated ? oldPlayer.scoreUpdated + 1 : 1
         }
         players[playerIndex] = response
@@ -40,24 +41,7 @@ class Players extends Component {
         players
       });
     }
-  }
-
-  _renderWinnerEffect(isWinner) {
-    if (isWinner) {
-      return (
-        <React.Fragment>
-          <div className="bubble bubble-1"></div>
-          {/*<div className="bubble bubble-2">o</div>*/}
-          {/*<div className="bubble bubble-3">o</div>*/}
-          {/*<div className="bubble bubble-4">o</div>*/}
-          {/*<div className="bubble bubble-5">o</div>*/}
-          {/*<div className="bubble bubble-6">o</div>*/}
-        </React.Fragment>
-      )
-    } else {
-      return null
-    }
-  }
+  };
 
   render() {
     const channel = { channel: 'GameChannel', id: this.props.game_id }
@@ -79,19 +63,17 @@ class Players extends Component {
               className += " Player-winner"
             }
             if (player.scoreUpdated) {
+              console.log(player.name + " " + player.scoreUpdated)
               className += " Player-score-updated-" + player.scoreUpdated % 2
             }
             return (
-              <React.Fragment>
-                <div key={player.id} className={className}>
-                  {player.name}
-                  <div>
-                    Score:
-                    <div className="Player-score">{player.score}</div>
-                  </div>
+              <div key={player.id} className={className}>
+                {player.name}
+                <div>
+                  Score:
+                  <div className="Player-score">{player.score}</div>
                 </div>
-                {this._renderWinnerEffect(winnerIds.includes(player.id))}
-              </React.Fragment>
+              </div>
             )
           })}
         </div>
