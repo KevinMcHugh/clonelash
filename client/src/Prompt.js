@@ -45,7 +45,7 @@ class Prompt extends Component {
     }
     if (!_.isEmpty(this.state.prompts)) {
       return (
-        <div className="Prompt" autoComplete="off">
+        <div className="Prompt">
           <ActionCableConsumer
             channel={channel}
             onReceived={this.handleReceivedPlayerMessage} />
@@ -58,6 +58,7 @@ class Prompt extends Component {
   _onSubmit = (e,messageId) => {
     e.preventDefault()
     const text = e.target.elements[0].value
+    e.target.elements[0].value = ''
     axios.put('responses/' + messageId,
       {text: text})
       .then(response => {
@@ -86,7 +87,7 @@ class Prompt extends Component {
     if (message.id) {
       return (
         <form onSubmit={(e) => this._onSubmit(e,message.id)}>
-          <input name="text"/>
+          <input name="text" autoComplete="off"/>
           <button>OK</button>
         </form>
       )
