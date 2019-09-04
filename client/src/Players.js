@@ -30,7 +30,7 @@ class Players extends Component {
         let oldPlayer = players[playerIndex]
         if (oldPlayer.score != response.score) {
           console.log(response.name + " score updated")
-          _.merge(response, {'scoreUpdated': true})
+          response.scoreUpdated = oldPlayer.scoreUpdated ? oldPlayer.scoreUpdated + 1 : 1
         }
         players[playerIndex] = response
       } else {
@@ -63,7 +63,8 @@ class Players extends Component {
               className += " Player-winner"
             }
             if (player.scoreUpdated) {
-              className += " Player-score-updated"
+              console.log(player.name + " " + player.scoreUpdated)
+              className += " Player-score-updated-" + player.scoreUpdated % 2
             }
             return (
               <div key={player.id} className={className}>

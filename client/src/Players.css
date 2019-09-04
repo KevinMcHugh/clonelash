@@ -12,8 +12,12 @@
 }
 
 .Player-winner {
-  background-color: #ffc900;
+  background-color: #eab800;
   border-style: hidden;
+  animation-name: score-transition-winner;
+  animation-duration: 3s;
+  animation-iteration-count: 50;
+  animation-timing-function: ease;
 }
 
 .Player-container {
@@ -22,13 +26,19 @@
   justify-content: center;
 }
 
-.Player-score-updated {
-  animation-name: score-transition;
+.Player-score-updated-0 {
+  animation-name: score-transition-a;
   animation-duration: 3s;
   animation-timing-function: ease;
 }
 
-@keyframes score-transition {
+.Player-score-updated-1 {
+  animation-name: score-transition-b;
+  animation-duration: 3s;
+  animation-timing-function: ease;
+}
+
+@keyframes score-transition-a {
   0%   {
     transform: scale(1,1) translateY(0) rotate(25deg);
     border-color: yellow;
@@ -41,5 +51,35 @@
   100% {
     transform: translateY(0) scale(1,1)  rotate(25deg);
     border-color: darkgray;
+  }
+}
+
+@keyframes score-transition-b {
+  0%   {
+    transform: scale(1,1) translateY(0) rotate(25deg);
+    border-color: yellow;
+  }
+  10%  { transform: scale(1.1,.9)   translateY(0) rotate(25deg); }
+  30%  { transform: scale(.9,1.1)   translateY(-50px)  rotate(25deg); }
+  50%  { transform: scale(1.05,.95) translateY(0) rotate(25deg); }
+  57%  { transform: scale(1,1)      translateY(-10px)  rotate(25deg); }
+  64%  { transform: scale(1,1)      translateY(0)  rotate(25deg); }
+  100% {
+    transform: translateY(0) scale(1,1)  rotate(25deg);
+    border-color: darkgray;
+  }
+}
+
+@keyframes score-transition-winner {
+  0%   {
+    transform: scale(1,1) translateY(0) rotate(25deg);
+  }
+  10%  { transform: scale(1.1,.9)   translateY(0) rotate(25deg); }
+  30%  { transform: scale(.9,1.1)   translateY(-50px)  rotate(25deg); }
+  50%  { transform: scale(1.05,.95) translateY(0) rotate(25deg); }
+  60%  { transform: scale(1,1)      translateY(-10px)  rotate(25deg); }
+  80%  { transform: scale(1,1)      translateY(0)  rotate(25deg); }
+  100% {
+    transform: translateY(0) scale(1,1)  rotate(25deg);
   }
 }
