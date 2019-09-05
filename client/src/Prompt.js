@@ -71,22 +71,22 @@ class Prompt extends Component {
   }
 
   _renderMessage() {
-    const message = _.first(this.state.prompts)
-    if (message) {
+    const prompt = _.first(this.state.prompts)
+    if (prompt) {
       return (
         <div>
           <div> Answer this question: </div>
-          {message.game_prompt.text}
-          {this._renderForm(message)}
+          {prompt.game_prompt.text}
+          {this._renderForm(prompt)}
         </div>
       )
     }
   }
 
-  _renderForm(message) {
-    if (message.id) {
+  _renderForm(prompt) {
+    if (prompt.id) {
       return (
-        <form onSubmit={(e) => this._onSubmit(e,message.id)}>
+        <form onSubmit={(e) => this._onSubmit(e,prompt.id)}>
           <input name="text" autoComplete="off"/>
           <button>OK</button>
         </form>
