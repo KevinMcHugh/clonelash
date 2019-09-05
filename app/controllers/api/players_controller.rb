@@ -16,6 +16,13 @@ class Api::PlayersController < ApplicationController
     render json: player
   end
 
+  def update
+    player = Player.find(params[:id])
+    player.update_attributes(params.require(:player).permit(:playing, :name))
+    GameChannel.broadcast_to(player.game, player.to_socket_json)
+    render json: player
+  end
+
   def prompts
     player = Player.find(params[:player_id])
     if player.admin && player.game.final_question_opened? || player.game.final_voting_opened?

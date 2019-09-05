@@ -60,6 +60,28 @@ class Game extends Component {
     }).catch(error => console.log(error))
   }
 
+  _onSubmitName = (e) => {
+    e.preventDefault()
+    const name = e.target.elements[0].value
+    axios.put('players/' + this.state.player.id,
+      {name: name, playing: true})
+      .then(response => {
+        this.setState({
+          player: response.data,
+        })
+    }).catch(error => console.log(error))
+  }
+
+  _onClickJustWatching = (e) => {
+    axios.put('players/' + this.state.player.id,
+      {playing: false})
+      .then(response => {
+        this.setState({
+          player: response.data,
+        })
+    }).catch(error => console.log(error))
+  }
+
   render() {
     const gameChannel = { channel: 'GameChannel', id: this.props.id }
     const protocol = (window.location.protocol == "http:" ? "ws://" : "wss://")
@@ -96,20 +118,35 @@ class Game extends Component {
   }
 
   _renderPlayer() {
-    if (!this.state.player) {
-      if (this.state.game.state !== 'created') {
-        return <div> Sorry, you are too late to join the game, but have fun voting!</div>
-      } else {
-        return (
+    const player = this.state.player
+    // TODO: support !player and game.state not created, canceled or finished
+    if (!player) {
+      return (
+        <React.Fragment>
           <form onSubmit={this._onSubmit} autoComplete="off">
             <input name="name" placeholder="player name"/>
             <button>OK</button>
           </form>
-        )
-      }
+        </React.Fragment>
+      )
+    } else if (player.admin && player.playing == null) {
+      return (
+        <React.Fragment>
+          {this._renderJustWatching()}
+          OR:
+          <form onSubmit={this._onSubmitName} autoComplete="off">
+            <input name="name" placeholder="player name"/>
+            <button>OK</button>
+          </form>
+        </React.Fragment>
+      )
     } else {
       return (<PlayerMessages playerId={this.state.player.id} game={this.state.game} />)
     }
+  }
+
+  _renderJustWatching() {
+    return <button onClick={this._onClickJustWatching}>Just Watching!</button>
   }
 }
 
