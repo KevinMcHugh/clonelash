@@ -8,15 +8,15 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  admin      :boolean          default(FALSE)
+#  playing    :boolean          default(TRUE)
 #
 
-# TODO: add admin?
 class Player < ApplicationRecord
   include SocketSendable
   belongs_to :game
   has_many :responses
 
-  scope :responding, -> { where(admin: false) }
+  scope :playing, -> { where(playing: true) }
 
   def score
     Vote.where(response: responses).count

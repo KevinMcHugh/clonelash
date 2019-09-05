@@ -41,9 +41,9 @@ class GamePrompt < ApplicationRecord
 
   def all_votes_received?
     if final_question
-      votes_needed = game.players.responding.count
+      votes_needed = game.players.playing.count
     else
-      votes_needed = game.players.responding.count - responses.count
+      votes_needed = game.players.playing.count - responses.count
     end
 
     votes.count >= votes_needed

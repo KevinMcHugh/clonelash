@@ -3,7 +3,7 @@ class CreateGamePrompts
 
   def call
     game = context.game
-    players = game.players.responding
+    players = game.players.playing
     unique_permutations = players.to_a.permutation(2).map(&:sort).uniq.shuffle
     pairs_by_player = {}
     pairs = []

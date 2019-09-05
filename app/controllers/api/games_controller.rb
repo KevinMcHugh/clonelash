@@ -10,7 +10,7 @@ class Api::GamesController < ApplicationController
   end
 
   def players
-    render json: Game.find(params[:game_id]).players.responding
+    render json: Game.find(params[:game_id]).players.playing
   end
 
   def create

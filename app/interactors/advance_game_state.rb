@@ -12,7 +12,7 @@ class AdvanceGameState
                                        final_question: true,
                                        state: :accepting_answers)
 
-      game.players.responding.each do |player|
+      game.players.playing.each do |player|
         response = Response.create(player: player, game_prompt: final_prompt)
 
         # wait actually this is gonna kind suck it's very slow.
