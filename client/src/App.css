@@ -46,6 +46,10 @@
   color: gray;
 }
 
+button {
+  font-size: 28px;
+}
+
 a {
   text-decoration: underline;
 }
