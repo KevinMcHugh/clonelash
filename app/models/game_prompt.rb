@@ -58,7 +58,7 @@ class GamePrompt < ApplicationRecord
     end
 
     if !options[:player] ||
-        options[:player]&.admin ||
+        !options[:player]&.playing? ||
         !accepting_votes? ||
         votes.find_by(player: options[:player]) ||
         (!final_question? && responses.find_by(player: options[:player]))

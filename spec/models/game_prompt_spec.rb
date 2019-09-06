@@ -55,17 +55,17 @@ RSpec.describe GamePrompt do
       # TODO lol too many factors
     end
     context 'player is provided,' do
-      let(:player) { Player.create(game: game, admin: admin) }
+      let(:player) { Player.create(game: game, playing: playing) }
 
-      context 'player is an admin' do
-        let(:admin) { true }
+      context 'player is not playing' do
+        let(:playing) { false }
         it 'says no responses are selectable' do
           expect(subject[:responses].map { |r| r[:selectable] }).to eq([false,false])
         end
       end
 
-      context 'player is not an admin,' do
-        let(:admin) { false }
+      context 'player is playing,' do
+        let(:playing) { true }
 
         context 'player has not voted,' do
           context 'final question' do
