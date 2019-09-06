@@ -76,7 +76,7 @@ class Vote extends Component {
   _renderResponses(vote) {
     return vote.responses.map((response) => {
       return (
-        <button key={response.id} onClick={(e) => this._onClick(e,response.id)} disabled={!response.selectable} >
+        <button className="Vote-option" key={response.id} onClick={(e) => this._onClick(e,response.id)} disabled={!response.selectable} >
           {response.text}
         </button>
       )
