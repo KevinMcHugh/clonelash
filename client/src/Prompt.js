@@ -87,7 +87,7 @@ class Prompt extends Component {
     if (prompt.id) {
       return (
         <form onSubmit={(e) => this._onSubmit(e,prompt.id)}>
-          <input name="text" autoComplete="off"/>
+          <input name="text" autoComplete="off" maxlength={30}/>
           <button>OK</button>
         </form>
       )

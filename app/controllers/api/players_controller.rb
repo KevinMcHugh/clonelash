@@ -3,7 +3,7 @@ class Api::PlayersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    player = Player.create(game_id: params[:game_id], name: params[:name])
+    player = Player.create(game_id: params[:game_id], name: params[:name].first(20))
     GameChannel.broadcast_to(player.game, player.to_socket_json)
     GameChannel.broadcast_to(player.game, player.game.to_socket_json)
 

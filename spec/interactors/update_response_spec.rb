@@ -11,7 +11,8 @@ RSpec.describe UpdateResponse do
     let(:game_prompt) { GamePrompt.create(game: game, prompt: prompt, state: :accepting_answers) }
     let!(:response_one) { Response.create(game_prompt: game_prompt, player: player_1) }
     let!(:response_two) { Response.create(game_prompt: game_prompt, player: player_2) }
-    subject { described_class.call(response: response_one, text: 'foo') }
+    let(:text) { 'foo' }
+    subject { described_class.call(response: response_one, text: text) }
 
     context 'responses to the first round of questions' do
       context 'not the final response' do
@@ -23,6 +24,14 @@ RSpec.describe UpdateResponse do
         it 'does not make a broadcast' do
           expect(GameChannel).not_to receive(:broadcast_to)
           subject
+        end
+
+        context 'an extra long response' do
+          let(:text) { 'a' * 200 }
+          it 'truncates the response' do
+            subject
+            expect(response_one.text.length).to be(30)
+          end
         end
       end
 

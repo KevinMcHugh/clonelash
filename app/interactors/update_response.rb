@@ -3,7 +3,7 @@ class UpdateResponse
 
   def call
     response = context.response
-    response.update_attributes(text: context.text)
+    response.update_attributes(text: context.text.first(30))
     game = response.game_prompt.game
     if game.all_responses_received?
       game.open_voting!
