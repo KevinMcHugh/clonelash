@@ -8,6 +8,7 @@
     "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "yarn": "^1.22.4"
   }
 }
