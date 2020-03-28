@@ -30,7 +30,6 @@ class Game < ApplicationRecord
     state :final_voting_opened
     state :finished
     state :canceled
-    state :art
 
     event :start do
       transitions from: :created, to: :started
