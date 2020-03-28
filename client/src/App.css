@@ -25,8 +25,9 @@ div {
 }
 
 .App-player {
-  height: 60%;
+  height: 200px;
   padding-top: 15%;
+  padding-bottom: 15%;
 }
 
 .App-body {
