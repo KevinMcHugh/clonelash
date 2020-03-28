@@ -28,7 +28,7 @@ class Players extends Component {
       const playerIndex = _.findIndex(players, {id: response.id})
       if (playerIndex >=0) {
         let oldPlayer = players[playerIndex]
-        if (oldPlayer.score != response.score) {
+        if (oldPlayer.score !== response.score) {
           response.scoreUpdated = oldPlayer.scoreUpdated ? oldPlayer.scoreUpdated + 1 : 1
         }
         players[playerIndex] = response
