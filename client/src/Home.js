@@ -29,19 +29,13 @@ class Home extends Component {
       <div className="App">
         <header className="App-header" />
         <div className="game-links">
-          <a onClick={this.onClickGame}> Join the existing Game </a>
+          <button onClick={this.onClickGame}> Join the existing game </button>
         </div>
-        {this._renderNewGameButton()}
+        <div className="new-game">
+          <button onClick={this._onClickNewGame}>Start your own game</button>
+        </div>
       </div>
     );
-  }
-
-  _renderNewGameButton = () => {
-    return (
-      <div className="new-game">
-        <a onClick={this._onClickNewGame}>Start Your Own Game</a>
-      </div>
-    )
   }
 
   onClickGame = () => {
