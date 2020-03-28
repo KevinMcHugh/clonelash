@@ -93,16 +93,13 @@ class Game extends Component {
             <ActionCableConsumer channel={gameChannel}
                                  onReceived={this.handleReceivedGame} />
             <header className="App-header">
-              game state: {this.state.game.state}
+              <Admin game_id={this.props.id} player={this.state.player}/>
+              <button onClick={this.props.unsetCookies} className="small">Leave the game now</button>
             </header>
             <div className="App-body">
               <div className="App-player">{this._renderPlayer()}</div>
               <Players game_id={this.props.id} player={this.state.player} winners={this.state.game.winners} />
             </div>
-            <footer className="App-footer">
-              <Admin game_id={this.props.id} player={this.state.player}/>
-              <button onClick={this.props.unsetCookies}>Leave the game now!</button>
-            </footer>
           </div>
         </ActionCableProvider>
       )

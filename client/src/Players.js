@@ -47,7 +47,7 @@ class Players extends Component {
     const playerId = (this.props.player || {}).id
     const winnerIds = this.props.winners ? this.props.winners.map(winner => { return winner.id }) : []
 
-    if (this.state.players) {
+    if (this.state.players.length > 0) {
       return (
         <div className='Player-container'>
           <ActionCableConsumer
@@ -68,8 +68,13 @@ class Players extends Component {
               <div key={player.id} className={className}>
                 {player.name}
                 <div>
-                  Score:
-                  <div className="Player-score">{player.score}</div>
+                  Score: {player.score}
+                  <div className="Player-score" style={{
+                    width: `${player.score * 10}px`,
+                    transitionProperty: "width",
+                    transitionDuration: `1.5s`,
+                    transitionTimingFunction: "ease-out"}
+                  }/>
                 </div>
               </div>
             )

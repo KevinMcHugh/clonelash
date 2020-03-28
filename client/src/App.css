@@ -3,7 +3,6 @@
   background-color: #282c34;
   color: white;
   font-size: calc(10px + 2vmin);
-  height: 100%;
 }
 
 .App-logo {
@@ -45,9 +44,13 @@
   padding: 20%;
   color: gray;
 }
+.small {
+  font-size: 14px;
+}
 
 button {
   font-size: 28px;
+  border-color: gray;
 }
 
 a {
