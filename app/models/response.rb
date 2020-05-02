@@ -22,7 +22,8 @@ class Response < ApplicationRecord
       id: id,
       text: text,
       game_prompt: {
-        text: game_prompt.prompt.text
+        text: game_prompt.prompt.text,
+        format: game_prompt.prompt.format
       },
       player: {
         id: player&.id,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { ActionCableConsumer } from 'react-actioncable-provider';
+import CanvasDraw from "react-canvas-draw";
 import _ from 'lodash';
 import './Prompt.css';
 
@@ -49,7 +50,7 @@ class Prompt extends Component {
           <ActionCableConsumer
             channel={channel}
             onReceived={this.handleReceivedPlayerMessage} />
-          { this._renderMessage() }
+          { this._renderPrompt() }
         </div>
       )
     }
@@ -70,9 +71,11 @@ class Prompt extends Component {
     }).catch(error => console.log(error))
   }
 
-  _renderMessage() {
+  _renderPrompt() {
     const prompt = _.first(this.state.prompts)
-    if (prompt) {
+    if (prompt && prompt.game_prompt.format === 'art') {
+      return (<CanvasDraw onChange={() => console.log("onChange")} />);
+    } else if (prompt) {
       return (
         <div>
           <div> Answer this question: </div>
@@ -81,6 +84,16 @@ class Prompt extends Component {
         </div>
       )
     }
+  }
+
+  _renderMessage(prompt) {
+    return (
+      <div>
+        <div> Answer this question: </div>
+        {prompt.game_prompt.text}
+        {this._renderForm(prompt)}
+      </div>
+    )
   }
 
   _renderForm(prompt) {

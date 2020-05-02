@@ -16,5 +16,6 @@ class Prompt < ApplicationRecord
     new_name: 1,
     fill_in_the_blank: 2,
     quote: 3,
+    art: 4
   }
 end
