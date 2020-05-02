@@ -6,6 +6,7 @@
     "classnames": "^2.2.6",
     "history": "^3.3.0",
     "http-proxy-middleware": "^0.19.1",
+    "lz-string": "^1.4.4",
     "react": "^16.8.2",
     "react-actioncable-provider": "github:ihollander/react-actioncable-provider#459769d29091cbb882ba0e2da798efcd868d6e58",
     "react-dom": "^16.8.2",

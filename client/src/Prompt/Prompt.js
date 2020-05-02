@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Canvas from './Canvas';
 import './Prompt.css';
 
-class Prompt extends Component {
+export default class Prompt extends Component {
 
   constructor(props){
     super(props)
@@ -56,12 +56,9 @@ class Prompt extends Component {
     }
   }
 
-  _onSubmit = (e,messageId) => {
-    e.preventDefault()
-    const text = e.target.elements[0].value
-    e.target.elements[0].value = ''
+  _onSubmit = (params,messageId) => {
     axios.put('responses/' + messageId,
-      {text: text})
+      params)
       .then(response => {
         let prompts = this.state.prompts
         _.remove(prompts, {id: response.data.id})
@@ -75,7 +72,10 @@ class Prompt extends Component {
     const prompt = _.first(this.state.prompts)
     if (prompt && prompt.game_prompt.format === 'art') {
       return (
-        <Canvas />
+        <>
+          <div>{prompt.game_prompt.text}</div>
+          <Canvas onSubmit={this._onSubmit} promptId={prompt.id}/>
+        </>
       );
     } else if (prompt) {
       return (
@@ -101,7 +101,12 @@ class Prompt extends Component {
   _renderForm(prompt) {
     if (prompt.id) {
       return (
-        <form onSubmit={(e) => this._onSubmit(e,prompt.id)}>
+        <form onSubmit={(e) =>  {
+          e.preventDefault();
+          const text = e.target.elements[0].value
+          e.target.elements[0].value = ''
+          this._onSubmit({ text },prompt.id)}}
+        >
           <input name="text" autoComplete="off" maxLength={30}/>
           <button>OK</button>
         </form>
@@ -109,5 +114,3 @@ class Prompt extends Component {
     }
   }
 }
-
-export default Prompt
