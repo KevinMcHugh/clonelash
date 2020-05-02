@@ -12,12 +12,13 @@ input {
   justify-content: center;
 }
 
-.colorSwatch {
+.swatch {
   height: 24px;
   width: 24px;
   border-style: solid;
   border-radius: 4px;
   border-width: 2px;
+  border-color: dimgray;
 }
 
 .swatchContainer {
@@ -33,4 +34,25 @@ input {
 
 .selectorContainer {
   display: flex;
+  margin-left: 18%;
+  margin-right: 18%;
+}
+
+.brushSizeSelector {
+  border-width: 2px
+}
+
+.dot {
+  border-radius: 50%;
+  height: 20px;
+  border-color: black;
+  width: 20px;
+  background-color: black;
+  display: inline-block;
+}
+
+.brushSwatch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
