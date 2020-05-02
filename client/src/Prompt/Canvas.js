@@ -6,12 +6,18 @@ import './Prompt.css';
 export default function Canvas(props) {
 
   const [brushColor, setBrushColor] = useState('#FF0000')
-  const [backgroundColor, setBackgroundColor] = useState('#FFFFFF')
+  const [backgroundColor, setBackgroundColor] = useState('#000000')
 
   return (
     <>
-      <SwatchSelector setColor={setBrushColor} color={brushColor} />
-      <SwatchSelector setColor={setBackgroundColor} color={backgroundColor} />
+      <div className="selectorContainer">
+        <SwatchSelector setColor={setBrushColor}
+                        selectedColor={brushColor}
+                        colors={['#FF0000','#00FF00','#0000FF']} />
+        <SwatchSelector setColor={setBackgroundColor}
+                        selectedColor={backgroundColor}
+                        colors={['#000000','#6B6B6B','#080175','#5a2a00']}/>
+      </div>
       <div className="canvasContainer">
         <CanvasDraw hideGrid={true}
                     hideInterface={true}

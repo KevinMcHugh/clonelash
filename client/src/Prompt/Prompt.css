@@ -30,3 +30,7 @@ input {
 .selectedSwatch {
   border-color: white;
 }
+
+.selectorContainer {
+  display: flex;
+}
