@@ -75,9 +75,7 @@ class Prompt extends Component {
     const prompt = _.first(this.state.prompts)
     if (prompt && prompt.game_prompt.format === 'art') {
       return (
-        <div className="canvasContainer">
-          <Canvas />
-        </div>
+        <Canvas />
       );
     } else if (prompt) {
       return (
