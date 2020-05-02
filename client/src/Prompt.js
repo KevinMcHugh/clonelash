@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { ActionCableConsumer } from 'react-actioncable-provider';
-import CanvasDraw from "react-canvas-draw";
 import _ from 'lodash';
+import Canvas from './Canvas';
 import './Prompt.css';
 
 class Prompt extends Component {
@@ -74,7 +74,11 @@ class Prompt extends Component {
   _renderPrompt() {
     const prompt = _.first(this.state.prompts)
     if (prompt && prompt.game_prompt.format === 'art') {
-      return (<CanvasDraw onChange={() => console.log("onChange")} />);
+      return (
+        <div className="canvasContainer">
+          <Canvas />
+        </div>
+      );
     } else if (prompt) {
       return (
         <div>

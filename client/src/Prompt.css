@@ -5,3 +5,9 @@
 input {
   font-size: 28px;
 }
+
+.canvasContainer {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
