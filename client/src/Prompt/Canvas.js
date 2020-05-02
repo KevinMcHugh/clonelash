@@ -11,11 +11,13 @@ export default function Canvas(props) {
   return (
     <>
       <SwatchSelector setColor={setBrushColor} color={brushColor} />
+      <SwatchSelector setColor={setBackgroundColor} color={backgroundColor} />
       <div className="canvasContainer">
         <CanvasDraw hideGrid={true}
                     hideInterface={true}
                     lazyRadius={0}
-                    brushColor={brushColor} />
+                    brushColor={brushColor}
+                    backgroundColor={backgroundColor} />
       </div>
     </>
   );
