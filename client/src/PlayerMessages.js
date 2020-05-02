@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Prompt from './Prompt';
+import Prompt from './Prompt/Prompt';
 import Vote from './Vote';
 
 class PlayerMessages extends Component {
