@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "react": "^16.13.1",
+    "react-canvas-draw": "^1.1.1",
     "yarn": "^1.22.4"
   }
 }
