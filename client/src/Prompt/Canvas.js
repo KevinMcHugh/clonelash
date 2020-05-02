@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CanvasDraw from "react-canvas-draw";
+import SwatchSelector from './SwatchSelector'
 import './Prompt.css';
 
 class Canvas extends Component {
@@ -21,17 +22,7 @@ class Canvas extends Component {
   render() {
     return (
       <>
-        <div className="swatchContainer">
-          <div style={{backgroundColor: '#FF0000', color: '#FF0000'}}
-               className="colorSwatch"
-               onClick={() => this.setColor('#FF0000')}/>
-          <div style={{backgroundColor: '#00FF00', color: '#00FF00'}}
-               className="colorSwatch"
-               onClick={() => this.setColor('#00FF00')}/>
-          <div style={{backgroundColor: '#0000FF', color: '#0000FF'}}
-               className="colorSwatch"
-              onClick={() => this.setColor('#0000FF')}/>
-        </div>
+        <SwatchSelector setColor={this.setColor} />
         <div className="canvasContainer">
           <CanvasDraw onChange={() => console.log("onChange")}
                       hideGrid={true}
