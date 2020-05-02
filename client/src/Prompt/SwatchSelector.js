@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Swatch from './Swatch'
 import './Prompt.css';
 
-export default function SwatchSelector(props) {
+export default function SwatchSelector({ setColor, color }) {
   return (
     <div className="swatchContainer">
-      <div style={{backgroundColor: '#FF0000', color: '#FF0000'}}
-           className="colorSwatch"
-           onClick={() => props.setColor('#FF0000')}/>
-      <div style={{backgroundColor: '#00FF00', color: '#00FF00'}}
-           className="colorSwatch"
-           onClick={() => props.setColor('#00FF00')}/>
-      <div style={{backgroundColor: '#0000FF', color: '#0000FF'}}
-           className="colorSwatch"
-           onClick={() => props.setColor('#0000FF')}/>
+      <Swatch color={'#FF0000'} setColor={setColor} selectedColor={color} />
+      <Swatch color={'#00FF00'} setColor={setColor} selectedColor={color} />
+      <Swatch color={'#0000FF'} setColor={setColor} selectedColor={color} />
     </div>
   );
 }
