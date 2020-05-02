@@ -9,7 +9,8 @@ export default function BrushSelector({ setBrushSize, selectedBrushSize, brushCo
       { [14, 10, 6].map(size => {
         return (
           <div className={classNames("swatch brushSwatch", { "selectedSwatch": selectedBrushSize === size})}
-               onClick={() => setBrushSize(size)}>
+               onClick={() => setBrushSize(size)}
+               key={size}>
             <span className="dot" style={{ backgroundColor: brushColor, height: `${size}px`, width: `${size}px`}}/>
           </div>
         )

@@ -120,7 +120,7 @@ class Game extends Component {
     if (!player) {
       return (
         <React.Fragment>
-          <form onSubmit={this._onSubmit} autoComplete="off" maxlength={20}>
+          <form onSubmit={this._onSubmit} autoComplete="off" maxLength={20}>
             <input name="name" placeholder="player name"/>
             <button>OK</button>
           </form>

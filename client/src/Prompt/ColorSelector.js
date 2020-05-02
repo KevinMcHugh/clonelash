@@ -1,12 +1,15 @@
 import React from 'react';
-import ColorSwatch from './ColorSwatch'
+import classNames from 'classnames';
 import './Prompt.css';
 
 export default function ColorSelector({ setColor, selectedColor, colors }) {
   return (
     <div className="swatchContainer">
       { colors.map(color => {
-        return <ColorSwatch color={color} setColor={setColor} selectedColor={selectedColor}/>
+          return <div style={{backgroundColor: color, color}}
+                      className={classNames("swatch", {"selectedSwatch": color === selectedColor})}
+                      onClick={() => setColor(color)}
+                      key={color}/>
       })}
     </div>
   );
