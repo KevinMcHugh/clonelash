@@ -39,7 +39,11 @@ export default function Canvas({onSubmit, promptId}) {
                     backgroundColor={backgroundColor}
                     brushRadius={brushSize}
                     ref={canvasDraw => (setCanvas(canvasDraw))}/>
-        <button onClick={() => {onSubmit({'binary': canvas.getSaveData(), 'backgroundColor': backgroundColor}, promptId)}}>
+        <button onClick={() => {
+          console.log(LZString.compress(canvas.getSaveData()));
+          onSubmit({'response': {'binary_content': LZString.compress(canvas.getSaveData()),
+                                 'text': backgroundColor}}, promptId)
+        }}>
           foo
         </button>
       </div>

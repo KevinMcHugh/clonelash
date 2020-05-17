@@ -9,6 +9,6 @@ class Api::ResponsesController < ApplicationController
 
   private
   def update_params
-    params.require(:response).permit(:text)
+    params.require(:response).permit(:text, :binary_content)
   end
 end
