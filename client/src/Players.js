@@ -84,9 +84,14 @@ class Players extends Component {
     }
 
     return (
-      <div>
-        hang on...
-      </div>
+      <>
+        <ActionCableConsumer
+          channel={channel}
+          onReceived={this.handleReceivedPlayer} />
+        <div>
+          hang on...
+        </div>
+      </>
     )
   }
 }
