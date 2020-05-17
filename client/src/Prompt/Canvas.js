@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CanvasDraw from "react-canvas-draw";
 import LZString from 'lz-string'
 import ColorSelector from './ColorSelector'
@@ -11,6 +11,12 @@ export default function Canvas({onSubmit, promptId}) {
   const [backgroundColor, setBackgroundColor] = useState('#000000')
   const [brushSize, setBrushSize] = useState(14)
   const [canvas, setCanvas] = useState(null)
+
+  useEffect(() => {
+    if (canvas) {
+      canvas.clear()
+    }
+  }, [promptId])
 
   return (
     <>
