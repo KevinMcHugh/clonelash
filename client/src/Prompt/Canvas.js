@@ -30,6 +30,12 @@ export default function Canvas({onSubmit, promptId}) {
         <ColorSelector setColor={setBackgroundColor}
                        selectedColor={backgroundColor}
                        colors={['#000000','#6B6B6B','#080175','#5a2a00']}/>
+        <div className="swatchContainer">
+          <div className="swatch brushSwatch selectedSwatch"
+               onClick={() => canvas.undo()}>
+            <span>⎌</span>
+          </div>
+        </div>
       </div>
       <div className="canvasContainer">
         <CanvasDraw hideGrid={true}
