@@ -131,7 +131,7 @@ class Game extends Component {
         <React.Fragment>
           {this._renderJustWatching()}
           OR:
-          <form onSubmit={this._onSubmitName} autoComplete="off" maxlength={20}>
+          <form onSubmit={this._onSubmitName} autoComplete="off" maxLength={20}>
             <input name="name" placeholder="player name"/>
             <button>OK</button>
           </form>
